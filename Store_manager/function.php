@@ -419,4 +419,49 @@ if (isset($_POST['save_return_by_manager'])) {
     echo "Error: " . $sql . "<br>" . $connect->error;
   }
 }
+//save Salesman
+if(isset($_POST['saveSalesman'])){
+
+  $password=md5($_POST["password"]);
+  $sql = "INSERT INTO sales_manager (name, cnic,password,country,city,branch_name,phone)
+  VALUES ('$_POST[name]', '$_POST[cnic]','$password','$_POST[country]','$_POST[city]','$_POST[branch_name]','$_POST[phone]')";
+
+    if ($connect->query($sql) === TRUE) {
+    echo '<script type="text/javascript">alert("Salesman add successfully..!")
+    window.location.href="./SalesMan_add.php"
+    </script>';
+    } else {
+    echo "Error: " . $sql . "<br>" . $connect->error;
+    }
+}
+//edit Salesman
+if(isset($_POST['updateSalesman'])){
+
+  $password=md5($_POST["password"]);
+  $sql = "update  sales_manager set name='$_POST[name]',cnic='$_POST[cnic]',
+  password='$password',country='$_POST[country]',city='$_POST[city]'
+  ,branch_name='$_POST[branch_name]',phone='$_POST[phone]' where id='$_POST[id]'";
+
+    if ($connect->query($sql) === TRUE) {
+    echo '<script type="text/javascript">alert("Salesman Updated successfully..!")
+    window.location.href="./SalesMan_add.php"
+    </script>';
+    } else {
+    echo "Error: " . $sql . "<br>" . $connect->error;
+    }
+}
+//del salesman
+if(isset($_POST['delsalesmannow'])){
+
+  
+  $sql = "DELETE FROM sales_manager where id='$_POST[id]' ";
+
+    if ($connect->query($sql) === TRUE) {
+    echo '<script type="text/javascript">alert("Salesman deleted successfully..!")
+    window.location.href="./SalesMan_add.php"
+    </script>';
+    } else {
+    echo "Error: " . $sql . "<br>" . $connect->error;
+    }
+}
 ?>

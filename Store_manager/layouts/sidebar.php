@@ -15,6 +15,9 @@
           <a href="./salesreturn.php" class="list-group-item list-group-item-action py-2 ripple ">
             <i class="fas fa-medkit fa-fw me-3"></i><span style="font-size: 12px!important;">Salesmans  return  </span>
           </a>
+          <a href="./SalesMan_add.php" class="list-group-item list-group-item-action py-2 ripple ">
+            <i class="fas fa-users fa-fw me-3"></i><span style="font-size: 12px!important;">Salesman add  </span>
+          </a>
 
         </div>
       </div>

@@ -27,7 +27,9 @@
 
               
             </form>
-            <a href="./salesmanLogin.php">-->go to salesman</a>
+            <a href="./salesmanLogin.php">-->go to Salesman</a><br>
+            <a href="./StoreManagerLogin.php">-->go to store Manager</a><br>
+            <a href="./citymanagerLogin.php">-->go to city Manager</a>
         </div>
     </div>
 </div>

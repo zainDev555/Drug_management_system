@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 27, 2021 at 01:38 PM
+-- Generation Time: Aug 10, 2021 at 02:37 PM
 -- Server version: 10.4.20-MariaDB
--- PHP Version: 7.4.21
+-- PHP Version: 7.4.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,41 @@ SET time_zone = "+00:00";
 --
 -- Database: `drug`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `city_manager`
+--
+
+CREATE TABLE `city_manager` (
+  `id` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `email` text NOT NULL,
+  `cnic` text NOT NULL,
+  `phone` text NOT NULL,
+  `password` text NOT NULL,
+  `city` text NOT NULL,
+  `country` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `city_manager`
+--
+
+INSERT INTO `city_manager` (`id`, `name`, `email`, `cnic`, `phone`, `password`, `city`, `country`) VALUES
+(1, 'city_manager', 'citymanager@citymanager.com', '11100-5487963-2', '99887544852', '25d55ad283aa400af464c76d713c07ad', 'Lahore', 'pakistan');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `city_manager_record`
+--
+
+CREATE TABLE `city_manager_record` (
+  `id` int(250) NOT NULL,
+  `c_m_name` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -56,16 +91,19 @@ CREATE TABLE `sales_manager` (
   `name` text NOT NULL,
   `cnic` text NOT NULL,
   `phone` text NOT NULL,
-  `password` text NOT NULL
+  `password` text NOT NULL,
+  `country` text NOT NULL,
+  `city` text NOT NULL,
+  `branch_name` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `sales_manager`
 --
 
-INSERT INTO `sales_manager` (`id`, `name`, `cnic`, `phone`, `password`) VALUES
-(2, 'ijal', '12345-12345678-4', '123456789', '25d55ad283aa400af464c76d713c07ad'),
-(3, 'test', '12345-543216-7', '12345678', '25d55ad283aa400af464c76d713c07ad');
+INSERT INTO `sales_manager` (`id`, `name`, `cnic`, `phone`, `password`, `country`, `city`, `branch_name`) VALUES
+(2, 'ijal', '12345-12345678-4', '123456789', '827ccb0eea8a706c4c34a16891f84e7b', 'pakistan', 'karachi', 'Gulberg'),
+(3, 'test', '12345-543216-7', '12345678', '25d55ad283aa400af464c76d713c07ad', 'pakistan', 'lahore', 'Gulberg');
 
 -- --------------------------------------------------------
 
@@ -162,7 +200,7 @@ CREATE TABLE `s_manager_daily_record` (
 --
 
 INSERT INTO `s_manager_daily_record` (`id`, `salesman_name`, `salesman_day_Sale`, `salesman_cnic`, `salesman_id`, `s_manager_id`, `created_at`) VALUES
-(1, 'ijal', 400, '12345-12345678-4', 2, 2, '2021-07-27');
+(1, 'ijal', 400, '12345-12345678-4', 2, 1, '2021-07-27');
 
 -- --------------------------------------------------------
 
@@ -244,6 +282,18 @@ INSERT INTO `s_manager_weekly_record` (`id`, `salesman_name`, `salesman_weekly_s
 --
 
 --
+-- Indexes for table `city_manager`
+--
+ALTER TABLE `city_manager`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `city_manager_record`
+--
+ALTER TABLE `city_manager_record`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `medicine`
 --
 ALTER TABLE `medicine`
@@ -302,6 +352,18 @@ ALTER TABLE `s_manager_weekly_record`
 --
 
 --
+-- AUTO_INCREMENT for table `city_manager`
+--
+ALTER TABLE `city_manager`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `city_manager_record`
+--
+ALTER TABLE `city_manager_record`
+  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `medicine`
 --
 ALTER TABLE `medicine`
@@ -311,7 +373,7 @@ ALTER TABLE `medicine`
 -- AUTO_INCREMENT for table `sales_manager`
 --
 ALTER TABLE `sales_manager`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `sales_medicine`
