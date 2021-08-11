@@ -2,16 +2,18 @@
 include "../db.php";
 
 session_start();
+$_SESSION['city'];
 
 if (!$_SESSION['email']) {
 
-  header("location:../StoreManagerLogin.php");
+  header("location:../citymanagerLogin.php");
 }
 if (isset($_POST['logout'])) {
  
   session_destroy();
   unset($_SESSION['email']);
-  header("location:../StoreManagerLogin.php");
+  unset($_SESSION['city']);
+  header("location:../citymanagerLogin.php");
 }
 
 

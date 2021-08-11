@@ -76,6 +76,7 @@ if(isset($_POST['city_manager_log_in'])){
             // Add values to the session.
             $_SESSION['email'] = $email; // string
             $_SESSION['id'] = $row['id']; // string
+            $_SESSION['city'] = $row['city']; // string
             echo '<script language="javascript"> alert("Welcome TO Store")</script>';
             echo '<script language="javascript">    window.location.href = "./city_manager/index.php";;</script>';
           

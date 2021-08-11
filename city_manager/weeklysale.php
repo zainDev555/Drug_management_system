@@ -27,25 +27,28 @@ include "./layouts/navbar.php";
                 
                  
                     
-                     <input type="text" class="form-control" name="salesman_cnic" id="salesman_cnic" placeholder="Enter salesman CNIC  Like 25411-1456987-2 except space">
+                <input type="text" class="form-control" name="storemanager_cnic" id="storemanager_cnic" placeholder="Enter salesman CNIC  Like 25411-1456987-2 except space">
+                <input type="hidden" class="form-control" required name="city" id="city" value="<?php echo $_SESSION['city']; ?>" >
                     <label for=""> week start from</label>
-                     <input type="date" class="form-control" name="date_1" id="date_1" placeholder="Week start day">
-                     <label for=""> TO</label>
-                     <input type="date" class="form-control mb-2" name="date_2" id="date_2" placeholder="week end date">
+                     <input type="date" class="form-control " name="date_1" id="date_1"  
+        placeholder="dd-mm-yyyy" 
+        min="1997-01-01" max="2030-12-31" >
+                     <label for=""> TO end</label>
+                     <input type="text" class="form-control mb-2" name="date_2" id="date_2"  >
                     <button class="btn btn-success" id="salesman_find_by_week">search</button>
                   
                   <form action="./function.php" method="post">
                     <div class="form-group">
                    
-                      <input type="hidden" class="form-control" name="s_manager_id" value=" <?php echo $_SESSION['id']; ?>">
-                      <input type="hidden" class="form-control" name="salesman_cnic" id="salesman_cnic_store"  />
-                      <input type="hidden" class="form-control" name="salesman_id" id="salesman_id"  />
+                    <input type="hidden" class="form-control" required name="city_manager_id" value=" <?php echo $_SESSION['id']; ?>">
+                      <input type="hidden" class="form-control" required name="s_m_cnic" id="stor_storemanager_cnic"  />
+                      <input type="hidden" class="form-control" required name="storemananger_id" id="storemananger_id"  />
                       <input type="hidden" class="form-control" name="date_1" id="date_1_store"  />
                       <input type="hidden" class="form-control" name="date_2" id="date_2_store"  />
                     </div>
                     <div class="form-group">
                       <label for="medicine">Salesman Name </label>
-                      <input type="text" class="form-control" name="salesman_name" id="salesman_name">
+                      <input type="text" class="form-control" name="s_m_name" id="s_m_name">
 
                     </div>
                   
@@ -122,22 +125,32 @@ include "./layouts/navbar.php";
       $.ajax({
         url:'./function.php',
         type:'post',
-        data:{ get_salesman_sales_weekly:{
-            salesman_cnic:$("#salesman_cnic").val(),
-            date_1:$("#date_1").val(),
-            date_2:$("#date_2").val(),
+        data:{ get_storemanager_sales_weekly:{
+          storemanager_cnic:$("#storemanager_cnic").val(),
+          city:$("#city").val(),
+          date_1:$("#date_1").val(),
+          date_2:$("#date_2").val(),
 
         },
         },
         success:function(res){
+        
           const myObj = JSON.parse(res);
           console.log(myObj);
       
         var s_cnic=$.trim(myObj.salesman_cnic)
-        $("#salesman_name").val(myObj.salesman_name)
-        $("#salesman_weekly_sale").val(myObj.salesman_weekly_Sale)
-        $("#salesman_cnic_store").val(s_cnic)
-        $("#salesman_id").val(myObj.salesman_id)
+        if(myObj.storemanager_weekly_Sale==""){
+          alert("no sales record found for you search")
+          $("#salesman_weekly_sale").val(myObj.storemanager_weekly_Sale)
+
+          }
+          else
+          {
+          $("#salesman_weekly_sale").val(myObj.storemanager_weekly_Sale) 
+        }
+        $("#s_m_name").val(myObj.storemanager_name)
+               $("#s_m_cnic").val(s_cnic)
+               $("#storemananger_id").val(myObj.storemananger_id)
         $("#date_1_store").val(myObj.date_1)
       $("#date_2_store").val(myObj.date_2)
         
@@ -147,6 +160,19 @@ include "./layouts/navbar.php";
       
 
     });
+    $('#date_1').on("change",function(){
+   
+      $.ajax({
+        url:'./function.php',
+        type:'post',
+        data:{date_1 :$("#date_1").val()},      
+        success:function(res){
+          console.log(res)
+          $("#date_2").val(res)
+        } 
+    
+    });
+  });
   </script>
 <?php
 include "./layouts/footer.php";
