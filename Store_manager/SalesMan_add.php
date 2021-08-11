@@ -57,7 +57,7 @@ include "./layouts/navbar.php";
                     </div>
                     <div class="form-group">
                       <label for="medicine">branch__name</label>
-                      <input type="text" class="form-control" name="branch_name" id="branch_name">
+                      <input type="text" class="form-control" name="branch_name" id="branch_name" value="<?php echo $_SESSION['city'];?>">
 
                     </div>
                     <div class="form-group">

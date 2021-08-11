@@ -30,45 +30,48 @@ include "./layouts/navbar.php";
                   <form action="./function.php" method="post">
    
                     <div class="form-group">
-                      <label for="medicine">Salesman Name </label>
-                      <input type="text" class="form-control" name="name" id="name">
+                      <label for="medicine">Store Manger Name </label>
+                      <input type="text" class="form-control" required name="name" id="name">
 
                     </div>
                   
                     <div class="form-group">
-                      <label for="medicine">salesman Cnic</label>
-                      <input type="text" class="form-control" name="cnic" id="cnic">
+                      <label for="medicine">Store Manger email</label>
+                      <input type="text" class="form-control" required name="email" id="email">
+
+                    </div>
+                    <div class="form-group">
+                      <label for="medicine">Store Manger Cnic</label>
+                      <input type="text" class="form-control" required name="cnic" id="cnic">
 
                     </div>
                     <div class="form-group">
                       <label for="medicine">phone no</label>
-                      <input type="text" class="form-control" name="phone" id="phone">
+                      <input type="text" class="form-control" required name="phone" id="phone">
 
                     </div>
                     <div class="form-group">
                       <label for="medicine">country</label>
-                      <input type="text" class="form-control" name="country" id="country">
+                      <input type="text" class="form-control" required name="country" id="country">
 
+                      <input type="hidden" class="form-control" required name="city" id="city"    value="<?php echo $_SESSION['city'];?>">
                     </div>
-                    <div class="form-group">
-                      <label for="medicine">city</label>
-                      <input type="text" class="form-control" name="city" id="city">
+                
 
-                    </div>
                     <div class="form-group">
                       <label for="medicine">branch__name</label>
-                      <input type="text" class="form-control" name="branch_name" id="branch_name">
+                      <input type="text" class="form-control" required name="branch_name" id="branch_name">
 
                     </div>
                     <div class="form-group">
                       <label for="medicine">password</label>
-                      <input type="text" class="form-control" name="password" id="password">
+                      <input type="text" class="form-control" required name="password" id="password">
 
                     </div>
 
       
                     <div class="form-group">
-                      <button class="btn btn-info" type="submit" name="saveSalesman"> save</button>
+                      <button class="btn btn-info" type="submit" name="saveStore_manager"> save</button>
 
                     </div>
 
@@ -81,8 +84,9 @@ include "./layouts/navbar.php";
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">salesman Name</th>
-                <th scope="col">salesman CNIC</th>
+                <th scope="col">Store Manager Name</th>
+                <th scope="col">Store Manager Email</th>
+                <th scope="col">Store Manager CNIC</th>
                 <th scope="col">phone</th>
                 <th scope="col">country</th>
                 <th scope="col">city</th>
@@ -94,7 +98,7 @@ include "./layouts/navbar.php";
             <?php
               
 
-                        $sql = "SELECT * FROM sales_manager";
+                        $sql = "SELECT * FROM store_manager where city='$_SESSION[city]'";
                         $result = $connect->query($sql);
 
                         if ($result->num_rows > 0) {
@@ -104,6 +108,7 @@ include "./layouts/navbar.php";
 
                                 <tr>
                                   <td><?php echo $row['name']; ?></td>
+                                  <td><?php echo $row['email']; ?></td>
                                     <th scope="row"><?php echo $row['cnic']; ?></th>
                           
                                     <td><?php echo $row['phone']; ?></td>
@@ -113,10 +118,10 @@ include "./layouts/navbar.php";
                                     <td>
                                   
                                 
-                                   <a  class="btn btn-sm     btn-info text-white" href="./editSalesMAn.php?id=<?php echo $row['id'] ?>" ><span class="fa fa-pen " ></span></a>
+                                   <a  class="btn btn-sm     btn-info text-white" href="./editSstoreManager.php?id=<?php echo $row['id'] ?>" ><span class="fa fa-pen " ></span></a>
                                    <form action="./function.php" method="post">
                                        <input type="hidden" name="id" value="<?php echo $row['id']?>" >
-                                       <button type="submit" class="btn btn-sm btn-danger" name="delsalesmannow"><span class="fa fa-trash "></span> </button>
+                                       <button type="submit" class="btn btn-sm btn-danger" name="delstoremanagernow"><span class="fa fa-trash "></span> </button>
                                    </form>
                                     </td>
                                 </tr>

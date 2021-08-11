@@ -27,13 +27,6 @@ include "./layouts/navbar.php";
                 
                  
                     
-<<<<<<< HEAD
-                     <input type="text" class="form-control" name="salesman_cnic" id="salesman_cnic" placeholder="Enter salesman CNIC  Like 25411-1456987-2 except space">
-                    <label for=""> week start from</label>
-                     <input type="date" class="form-control" name="date_1" id="date_1" placeholder="Week start day">
-                     <label for=""> TO</label>
-                     <input type="date" class="form-control mb-2" name="date_2" id="date_2" placeholder="week end date">
-=======
                 <input type="text" class="form-control" name="storemanager_cnic" id="storemanager_cnic" placeholder="Enter salesman CNIC  Like 25411-1456987-2 except space">
                 <input type="hidden" class="form-control" required name="city" id="city" value="<?php echo $_SESSION['city']; ?>" >
                     <label for=""> week start from</label>
@@ -42,42 +35,31 @@ include "./layouts/navbar.php";
         min="1997-01-01" max="2030-12-31" >
                      <label for=""> TO end</label>
                      <input type="text" class="form-control mb-2" name="date_2" id="date_2"  >
->>>>>>> b123a1b0dd55e65c089a6f336be80c35bb9a7487
                     <button class="btn btn-success" id="salesman_find_by_week">search</button>
                   
                   <form action="./function.php" method="post">
                     <div class="form-group">
                    
-<<<<<<< HEAD
-                      <input type="hidden" class="form-control" name="s_manager_id" value=" <?php echo $_SESSION['id']; ?>">
-                      <input type="hidden" class="form-control" name="salesman_cnic" id="salesman_cnic_store"  />
-                      <input type="hidden" class="form-control" name="salesman_id" id="salesman_id"  />
-=======
                     <input type="hidden" class="form-control" required name="city_manager_id" value=" <?php echo $_SESSION['id']; ?>">
                       <input type="hidden" class="form-control" required name="s_m_cnic" id="stor_storemanager_cnic"  />
                       <input type="hidden" class="form-control" required name="storemananger_id" id="storemananger_id"  />
->>>>>>> b123a1b0dd55e65c089a6f336be80c35bb9a7487
                       <input type="hidden" class="form-control" name="date_1" id="date_1_store"  />
                       <input type="hidden" class="form-control" name="date_2" id="date_2_store"  />
                     </div>
                     <div class="form-group">
                       <label for="medicine">Salesman Name </label>
-<<<<<<< HEAD
-                      <input type="text" class="form-control" name="salesman_name" id="salesman_name">
-=======
                       <input type="text" class="form-control" name="s_m_name" id="s_m_name">
->>>>>>> b123a1b0dd55e65c089a6f336be80c35bb9a7487
 
                     </div>
                   
                     <div class="form-group">
                       <label for="medicine">selected week salesman sale </label>
-                      <input type="text" class="form-control" name="salesman_weekly_sale" id="salesman_weekly_sale">
+                      <input type="text" class="form-control" name="storemanager_weekly_sale" id="salesman_weekly_sale">
 
                     </div>
       
                     <div class="form-group">
-                      <button class="btn btn-info" type="submit" name="save_weekly_sales_by_manager"> save</button>
+                      <button class="btn btn-info" type="submit" name="save_weekly_sales_by_store_manager"> save</button>
 
                     </div>
 
@@ -90,20 +72,20 @@ include "./layouts/navbar.php";
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">salesman Name</th>
-                <th scope="col">salesman CNIC</th>
+                <th scope="col">Store Manager Name</th>
+                <th scope="col">Store Manager CNIC</th>
                 
-                <th scope="col">salesman weekly sale</th>
+                <th scope="col">Store Manager weekly sale</th>
                 <th scope="col">From</th>
                 <th scope="col">TO </th>
-                <th scope="col">Save date</th>
+                <th scope="col">Save AT</th>
               </tr>
             </thead>
             <tbody>
             <?php
               
 
-                        $sql = "SELECT * FROM s_manager_weekly_record";
+                        $sql = "SELECT * FROM city_manager_weekly_record where city_manager_id='$_SESSION[id]'";
                         $result = $connect->query($sql);
 
                         if ($result->num_rows > 0) {
@@ -112,10 +94,10 @@ include "./layouts/navbar.php";
                             ?>
 
                                 <tr>
-                                  <td><?php echo $row['salesman_name']; ?></td>
-                                    <th scope="row"><?php echo $row['salesman_cnic']; ?></th>
+                                  <td><?php echo $row['s_m_name']; ?></td>
+                                    <th scope="row"><?php echo $row['s_m_cnic']; ?></th>
                           
-                                    <td><?php echo $row['salesman_weekly_sale']; ?></td>
+                                    <td><?php echo $row['s_m_weekly_sale']; ?></td>
                                     <td><?php echo $row['date_1']; ?></td>
                                     <td><?php echo $row['date_2']; ?></td>
                                     <td><?php echo $row['created_at']; ?></td>
@@ -143,36 +125,20 @@ include "./layouts/navbar.php";
       $.ajax({
         url:'./function.php',
         type:'post',
-<<<<<<< HEAD
-        data:{ get_salesman_sales_weekly:{
-            salesman_cnic:$("#salesman_cnic").val(),
-            date_1:$("#date_1").val(),
-            date_2:$("#date_2").val(),
-=======
         data:{ get_storemanager_sales_weekly:{
           storemanager_cnic:$("#storemanager_cnic").val(),
           city:$("#city").val(),
           date_1:$("#date_1").val(),
           date_2:$("#date_2").val(),
->>>>>>> b123a1b0dd55e65c089a6f336be80c35bb9a7487
 
         },
         },
         success:function(res){
-<<<<<<< HEAD
-=======
         
->>>>>>> b123a1b0dd55e65c089a6f336be80c35bb9a7487
           const myObj = JSON.parse(res);
           console.log(myObj);
       
-        var s_cnic=$.trim(myObj.salesman_cnic)
-<<<<<<< HEAD
-        $("#salesman_name").val(myObj.salesman_name)
-        $("#salesman_weekly_sale").val(myObj.salesman_weekly_Sale)
-        $("#salesman_cnic_store").val(s_cnic)
-        $("#salesman_id").val(myObj.salesman_id)
-=======
+        var s_cnic=$.trim(myObj.storemanager_cnic)
         if(myObj.storemanager_weekly_Sale==""){
           alert("no sales record found for you search")
           $("#salesman_weekly_sale").val(myObj.storemanager_weekly_Sale)
@@ -183,11 +149,10 @@ include "./layouts/navbar.php";
           $("#salesman_weekly_sale").val(myObj.storemanager_weekly_Sale) 
         }
         $("#s_m_name").val(myObj.storemanager_name)
-               $("#s_m_cnic").val(s_cnic)
-               $("#storemananger_id").val(myObj.storemananger_id)
->>>>>>> b123a1b0dd55e65c089a6f336be80c35bb9a7487
+        $("#stor_storemanager_cnic").val(s_cnic)
+        $("#storemananger_id").val(myObj.storemanager_id)
         $("#date_1_store").val(myObj.date_1)
-      $("#date_2_store").val(myObj.date_2)
+        $("#date_2_store").val(myObj.date_2)
         
           
         }
@@ -195,8 +160,6 @@ include "./layouts/navbar.php";
       
 
     });
-<<<<<<< HEAD
-=======
     $('#date_1').on("change",function(){
    
       $.ajax({
@@ -210,7 +173,6 @@ include "./layouts/navbar.php";
     
     });
   });
->>>>>>> b123a1b0dd55e65c089a6f336be80c35bb9a7487
   </script>
 <?php
 include "./layouts/footer.php";

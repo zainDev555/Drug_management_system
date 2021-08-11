@@ -18,7 +18,7 @@
           <a href="./SalesMan_add.php" class="list-group-item list-group-item-action py-2 ripple ">
             <i class="fas fa-users fa-fw me-3"></i><span style="font-size: 12px!important;">Salesman add  </span>
           </a>
-
+            <p><?php echo "You handle ".$_SESSION['branch_name']." branch in ".$_SESSION['city'];?></p>
         </div>
       </div>
     </nav>

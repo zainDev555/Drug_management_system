@@ -30,24 +30,10 @@
           <a href="./StoreManager_add.php" class="check_hover list-group-item list-group-item-action py-2 ripple ">
             <i class="fas fa-users fa-fw me-3"></i><span style="font-size: 12px!important;">Storemanager add  </span>
           </a>
-<<<<<<< HEAD
-          <?php
-          
-          $sql = "SELECT * FROM city_manager where email='$_SESSION[email]'";
-          $result = $connect->query($sql);
-
-          if ($result->num_rows > 0) {
-
-              while ($row = $result->fetch_assoc()) {
-              echo "you Manage : ".$row['city']." city";
-              }
-              }?>
-=======
           <?php 
           
 
 echo "you manage ".$_SESSION['city']."  city"; ?>
->>>>>>> b123a1b0dd55e65c089a6f336be80c35bb9a7487
 
         </div>
       </div>

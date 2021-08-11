@@ -47,6 +47,8 @@ if(isset($_POST['store_log_in'])){
             // Add values to the session.
             $_SESSION['email'] = $email; // string
             $_SESSION['id'] = $row['id']; // string
+            $_SESSION['city'] = $row['city']; // string
+            $_SESSION['branch_name'] = $row['branch_name']; // string
             echo '<script language="javascript"> alert("Welcome TO Store")</script>';
             echo '<script language="javascript">    window.location.href = "./Store_manager/index.php";;</script>';
           
@@ -76,10 +78,7 @@ if(isset($_POST['city_manager_log_in'])){
             // Add values to the session.
             $_SESSION['email'] = $email; // string
             $_SESSION['id'] = $row['id']; // string
-<<<<<<< HEAD
-=======
             $_SESSION['city'] = $row['city']; // string
->>>>>>> b123a1b0dd55e65c089a6f336be80c35bb9a7487
             echo '<script language="javascript"> alert("Welcome TO Store")</script>';
             echo '<script language="javascript">    window.location.href = "./city_manager/index.php";;</script>';
           

@@ -2,7 +2,7 @@
 include "../db.php";
 
 session_start();
-
+$_SESSION['city'];
 if (!$_SESSION['email']) {
 
   header("location:../StoreManagerLogin.php");
@@ -11,6 +11,7 @@ if (isset($_POST['logout'])) {
  
   session_destroy();
   unset($_SESSION['email']);
+  unset($_SESSION['city']);
   header("location:../StoreManagerLogin.php");
 }
 

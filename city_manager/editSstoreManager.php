@@ -16,10 +16,10 @@ include "./layouts/navbar.php";
 
                 <div class="card-body">
 
-                <h4>update salesman</h4>
+                <h4>update Store Manager</h4>
                  
   <?php 
-       $sql = "SELECT * FROM sales_manager where id='$_GET[id]'";
+       $sql = "SELECT * FROM store_manager where id='$_GET[id]'";
        $result = $connect->query($sql);
 
        if ($result->num_rows > 0) {
@@ -29,15 +29,22 @@ include "./layouts/navbar.php";
 
                   <form action="./function.php" method="post">
    
-                    <div class="form-group">
-                      <label for="medicine">Salesman Name </label>
+                  <div class="form-group">
+                      <label for="medicine">Store Manager Name </label>
                       <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                       <input type="text" class="form-control" name="name" id="name" value="<?php echo $row['name']; ?>">
 
                     </div>
+                    <div class="form-group">
+                      <label for="medicine">Store Manager Email </label>
+                      <input type="text" class="form-control" name="email" id="email" value="<?php echo $row['email']; ?>">
+
+                    </div>
+                  
+                  
                   
                     <div class="form-group">
-                      <label for="medicine">salesman Cnic</label>
+                      <label for="medicine">Store Manager Cnic</label>
                       <input type="text" class="form-control" name="cnic" id="cnic" value="<?php echo $row['cnic']; ?>">
 
                     </div>
@@ -69,7 +76,7 @@ include "./layouts/navbar.php";
 
       
                     <div class="form-group">
-                      <button class="btn btn-info" type="submit" name="updateSalesman"> save</button>
+                      <button class="btn btn-info" type="submit" name="updateStore_manager"> save</button>
 
                     </div>
 
