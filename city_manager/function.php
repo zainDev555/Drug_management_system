@@ -21,9 +21,17 @@ if (isset($_POST['save_data'])) {
 }
 //start of get daily date data
 if (isset($_POST['get_storemanager_daily_sales'])) {
+<<<<<<< HEAD
   $get_storemanager_daily_sales = trim($_POST['get_storemanager_daily_sales'], ' ');
   $sql = "SELECT * FROM store_manager
   WHERE cnic='$get_storemanager_daily_sales'";
+=======
+  
+  $get_storemanager_daily_sales = trim($_POST['get_storemanager_daily_sales']['cnic'], ' ');
+  $get_storemanager_city = trim($_POST['get_storemanager_daily_sales']['city'], ' ');
+  $sql = "SELECT * FROM store_manager
+  WHERE cnic='$get_storemanager_daily_sales' AND city='$get_storemanager_city'";
+>>>>>>> b123a1b0dd55e65c089a6f336be80c35bb9a7487
   $result = $connect->query($sql);
 
   if ($result->num_rows > 0) {
@@ -64,7 +72,11 @@ if (isset($_POST['get_storemanager_daily_sales'])) {
     }
   } else {
     $res = [
+<<<<<<< HEAD
       "stormanager_name" => " ", "storemanager_day_sale" => " ", "storemanager_cnic" => " ", "storemananger_id" => " ",
+=======
+      "stormanager_name" => "", "storemanager_day_sale" => "", "storemanager_cnic" => "", "storemananger_id" => "",
+>>>>>>> b123a1b0dd55e65c089a6f336be80c35bb9a7487
 
    
     ];
@@ -74,6 +86,7 @@ if (isset($_POST['get_storemanager_daily_sales'])) {
 //end of get daily date data
 //daily sale start
 if (isset($_POST['save_daily_sales_by_city_manager'])) {
+<<<<<<< HEAD
   var_dump($_REQUEST);die();
   $s_manager_id = $_POST['s_manager_id'];
   $salesman_name = $_POST['salesman_name'];
@@ -85,6 +98,19 @@ if (isset($_POST['save_daily_sales_by_city_manager'])) {
 
   $sql = "INSERT INTO s_manager_daily_record (salesman_name, salesman_cnic, 	salesman_day_sale,salesman_id,s_manager_id)
         VALUES ('$salesman_name', '$salesman_cnic', '$salesman_day_sale','$salesman_id','$s_manager_id')";
+=======
+
+  $city_m_id = $_POST['city_manager_id'];
+  $c_m_name = $_POST['c_m_name'];
+  $s_m_daily_sale = $_POST['s_m_daily_sale'];
+  // $salesman_weekly_sale=$_POST['salesman_weekly_sale'];
+  // $salesman_mounthly_sale=$_POST['salesman_mounthly_sale']; 
+  $s_m_id = $_POST['storemananger_id'];
+  $storemanager_cnic = $_POST['s_m_cnic'];
+
+  $sql = "INSERT INTO city_manager_record (c_m_name, s_m_cnic,s_m_daily_sale,s_m_id,city_m_id)
+        VALUES ('$c_m_name', '$storemanager_cnic', '$s_m_daily_sale','$s_m_id','$city_m_id')";
+>>>>>>> b123a1b0dd55e65c089a6f336be80c35bb9a7487
 
   if ($connect->query($sql) === TRUE) {
     echo '<script type="text/javascript">alert("added now")
@@ -96,25 +122,46 @@ if (isset($_POST['save_daily_sales_by_city_manager'])) {
 }
 //daily sale end
 //start of get weekly date data
+<<<<<<< HEAD
 if (isset($_POST['get_salesman_sales_weekly'])) {
   $salesman_cnic =  $_POST['get_salesman_sales_weekly']["salesman_cnic"];
   $date_1 =  $_POST['get_salesman_sales_weekly']["date_1"];
   $date_2 =  $_POST['get_salesman_sales_weekly']["date_2"];
+=======
+if (isset($_POST['get_storemanager_sales_weekly'])) {
+ 
+  $store_manger_cnic =  $_POST['get_storemanager_sales_weekly']["storemanager_cnic"];
+  $store_manger_city =  $_POST['get_storemanager_sales_weekly']["city"];
+  $date_1 =  date('y-m-d',strtotime($_POST['get_storemanager_sales_weekly']["date_1"]));
+  $date_2 = date('y-m-d', strtotime($_POST['get_storemanager_sales_weekly']["date_2"]));
+>>>>>>> b123a1b0dd55e65c089a6f336be80c35bb9a7487
 
 
 
 
+<<<<<<< HEAD
   $sql = "SELECT * FROM sales_manager
   WHERE cnic='$salesman_cnic'";
+=======
+  $sql = "SELECT * FROM store_manager
+  WHERE cnic='$store_manger_cnic' AND city='$store_manger_city'";
+>>>>>>> b123a1b0dd55e65c089a6f336be80c35bb9a7487
   $result = $connect->query($sql);
 
   if ($result->num_rows > 0) {
 
     while ($row = $result->fetch_assoc()) {
+<<<<<<< HEAD
       $salesmas_id = $row['id'];
 
       $sql1 = "SELECT * FROM sales_medicine
       WHERE salesman_id='$salesmas_id'";
+=======
+      $s_manager_id = $row['id'];
+
+      $sql1 = "SELECT * FROM s_manager_daily_record
+      WHERE s_manager_id='$s_manager_id'";
+>>>>>>> b123a1b0dd55e65c089a6f336be80c35bb9a7487
       $result = $connect->query($sql1);
       if ($result->num_rows > 0) {
 
@@ -123,8 +170,13 @@ if (isset($_POST['get_salesman_sales_weekly'])) {
           // salesman_weekly_sale
 
 
+<<<<<<< HEAD
           $sql3 = "SELECT sum(sm_price) as weekly_sum FROM sales_medicine
       WHERE salesman_id='$row[id]' AND created_at BETWEEN '$date_1' AND '$date_2'";
+=======
+          $sql3 = "SELECT sum(salesman_day_Sale) as weekly_sum FROM s_manager_daily_record
+      WHERE s_manager_id='$row[id]' AND created_at BETWEEN '$date_1' AND '$date_2'";
+>>>>>>> b123a1b0dd55e65c089a6f336be80c35bb9a7487
 
           $result = $connect->query($sql3);
 
@@ -136,8 +188,13 @@ if (isset($_POST['get_salesman_sales_weekly'])) {
           }
 
           $res = [
+<<<<<<< HEAD
             "salesman_name" => "$row[name]", "salesman_weekly_Sale" => "$sum_week",
             "date_1" => "$date_1", "date_2" => "$date_2", "salesman_cnic" => "$row[cnic]", "salesman_id" => "$row[id]",
+=======
+            "storemanager_name" => "$row[name]", "storemanager_weekly_Sale" => "$sum_week",
+            "date_1" => "$date_1", "date_2" => "$date_2", "storemanager_cnic" => "$row[cnic]", "storemanager_id" => "$row[id]",
+>>>>>>> b123a1b0dd55e65c089a6f336be80c35bb9a7487
           ];
           echo json_encode($res);
         }
@@ -145,8 +202,13 @@ if (isset($_POST['get_salesman_sales_weekly'])) {
     }
   } else {
     $res = [
+<<<<<<< HEAD
       "salesman_name" => " ", "salesman_weekly_Sale" => " ",
       "date_1" => " ", "date_2" => " ", "salesman_cnic" => " ", "salesman_id" => " ",
+=======
+      "storemanager_name" => "", "storemanager_weekly_Sale" => "",
+      "date_1" => "", "date_2" => "", "storemanager_cnic" => "", "storemanager_id" => "",
+>>>>>>> b123a1b0dd55e65c089a6f336be80c35bb9a7487
     ];
     echo json_encode($res);
   }
@@ -182,7 +244,11 @@ if (isset($_POST['save_weekly_sales_by_manager'])) {
 //start of get monthly data by manager
 if (isset($_POST['get_salesman_sales_monthly'])) {
 
+<<<<<<< HEAD
   $salesman_cnic =  $_POST['get_salesman_sales_monthly']["salesman_cnic"];
+=======
+  $salesman_cnic =  trim($_POST['get_salesman_sales_monthly']["salesman_cnic"]," ");
+>>>>>>> b123a1b0dd55e65c089a6f336be80c35bb9a7487
   $date_1 =  $_POST['get_salesman_sales_monthly']["date_1"];
   $date_2 =  $_POST['get_salesman_sales_monthly']["date_2"];
 
@@ -222,8 +288,13 @@ if (isset($_POST['get_salesman_sales_monthly'])) {
           // salesman_mounthly_sale
 
           $res = [
+<<<<<<< HEAD
             "salesman_name" => "$row[name]", "salesman_month_Sale" => "$sum_mounth",
             "salesman_cnic" => "$row[cnic]", "salesman_id" => "$row[id]",
+=======
+            "storemanager_name" => "$row[name]", "storemanager_month_Sale" => "$sum_mounth",
+            "storemanager_cnic" => "$row[cnic]", "storemanager_id" => "$row[id]",
+>>>>>>> b123a1b0dd55e65c089a6f336be80c35bb9a7487
             "date_1" => "$date_1", "date_2" => "$date_2",
           ];
           echo json_encode($res);
@@ -232,8 +303,13 @@ if (isset($_POST['get_salesman_sales_monthly'])) {
     }
   } else {
     $res = [
+<<<<<<< HEAD
       "salesman_name" => " ", "salesman_month_Sale" => " ", "salesman_cnic" => " ",
       "date_1" => " ", "date_2" => " ", "salesman_id" => " ",
+=======
+      "storemanager_name" => "", "storemanager_month_Sale" => "", "storemanager_cnic" => "",
+      "date_1" => "", "date_2" => "", "storemanager_id" => "",
+>>>>>>> b123a1b0dd55e65c089a6f336be80c35bb9a7487
     ];
     echo json_encode($res);
   }
@@ -395,8 +471,13 @@ if (isset($_POST['get_salesman_returns'])) {
     }
   } else {
     $res = [
+<<<<<<< HEAD
       "salesman_name" => " ", "salesman_return_amount" => " ", "salesman_cnic" => " ",
       "date_1" => " ", "date_2" => " ", "salesman_id" => " ",
+=======
+      "salesman_name" => "", "salesman_return_amount" => "", "salesman_cnic" => "",
+      "date_1" => "", "date_2" => "", "salesman_id" => "",
+>>>>>>> b123a1b0dd55e65c089a6f336be80c35bb9a7487
     ];
     echo json_encode($res);
   }
@@ -469,4 +550,13 @@ if(isset($_POST['delsalesmannow'])){
     echo "Error: " . $sql . "<br>" . $connect->error;
     }
 }
+<<<<<<< HEAD
+=======
+if (isset($_POST['date_1'])) {
+  $date=$_POST['date_1'];
+   $date_1=date('Y-m-d', strtotime($date. ' + 0 days')); 
+  
+  echo date('m/d/Y', strtotime($date_1. ' + 07 days')); 
+}
+>>>>>>> b123a1b0dd55e65c089a6f336be80c35bb9a7487
 ?>

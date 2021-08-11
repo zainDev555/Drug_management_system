@@ -2,16 +2,29 @@
 include "../db.php";
 
 session_start();
+<<<<<<< HEAD
 
 if (!$_SESSION['email']) {
 
   header("location:../StoreManagerLogin.php");
+=======
+$_SESSION['city'];
+
+if (!$_SESSION['email']) {
+
+  header("location:../citymanagerLogin.php");
+>>>>>>> b123a1b0dd55e65c089a6f336be80c35bb9a7487
 }
 if (isset($_POST['logout'])) {
  
   session_destroy();
   unset($_SESSION['email']);
+<<<<<<< HEAD
   header("location:../StoreManagerLogin.php");
+=======
+  unset($_SESSION['city']);
+  header("location:../citymanagerLogin.php");
+>>>>>>> b123a1b0dd55e65c089a6f336be80c35bb9a7487
 }
 
 
