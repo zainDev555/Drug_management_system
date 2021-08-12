@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 10, 2021 at 02:37 PM
+-- Generation Time: Aug 12, 2021 at 09:13 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.4.22
 
@@ -53,8 +53,45 @@ INSERT INTO `city_manager` (`id`, `name`, `email`, `cnic`, `phone`, `password`, 
 
 CREATE TABLE `city_manager_record` (
   `id` int(250) NOT NULL,
-  `c_m_name` text NOT NULL
+  `c_m_name` text NOT NULL,
+  `s_m_daily_sale` int(250) NOT NULL,
+  `s_m_cnic` text NOT NULL,
+  `s_m_id` int(250) NOT NULL,
+  `city_m_id` int(250) NOT NULL,
+  `created_at` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `city_manager_record`
+--
+
+INSERT INTO `city_manager_record` (`id`, `c_m_name`, `s_m_daily_sale`, `s_m_cnic`, `s_m_id`, `city_m_id`, `created_at`) VALUES
+(1, 'ijal', 400, '33521-5487888-2', 1, 1, '2021-08-10');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `city_manager_weekly_record`
+--
+
+CREATE TABLE `city_manager_weekly_record` (
+  `id` int(11) NOT NULL,
+  `s_m_name` text NOT NULL,
+  `s_m_weekly_sale` int(250) NOT NULL,
+  `s_m_cnic` text NOT NULL,
+  `s_m_id` int(250) NOT NULL,
+  `city_manager_id` int(250) NOT NULL,
+  `date_1` text NOT NULL,
+  `date_2` text NOT NULL,
+  `created_at` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `city_manager_weekly_record`
+--
+
+INSERT INTO `city_manager_weekly_record` (`id`, `s_m_name`, `s_m_weekly_sale`, `s_m_cnic`, `s_m_id`, `city_manager_id`, `date_1`, `date_2`, `created_at`) VALUES
+(1, 'ijal', 400, '33521-5487888-2', 1, 1, '21-08-04', '21-08-11', '2021-08-11');
 
 -- --------------------------------------------------------
 
@@ -169,15 +206,19 @@ CREATE TABLE `store_manager` (
   `email` text NOT NULL,
   `cnic` text NOT NULL,
   `phone` text NOT NULL,
-  `password` text NOT NULL
+  `country` text NOT NULL,
+  `password` text NOT NULL,
+  `city` text NOT NULL,
+  `branch_name` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `store_manager`
 --
 
-INSERT INTO `store_manager` (`id`, `name`, `email`, `cnic`, `phone`, `password`) VALUES
-(1, 'ijal', 'a@a.com', '33521-5487888-2', '0305-4568999', '25d55ad283aa400af464c76d713c07ad');
+INSERT INTO `store_manager` (`id`, `name`, `email`, `cnic`, `phone`, `country`, `password`, `city`, `branch_name`) VALUES
+(1, 'ijal', 'a@a.com', '33521-5487888-2', '0305-4568999', 'pakistan', '25d55ad283aa400af464c76d713c07ad', 'Lahore', 'Gulberg'),
+(5, 'zain', 'z@z.com', '12344-55555-4', '123465987', 'pakistan', '25d55ad283aa400af464c76d713c07ad', 'faisalabad', 'Gulberg');
 
 -- --------------------------------------------------------
 
@@ -200,7 +241,7 @@ CREATE TABLE `s_manager_daily_record` (
 --
 
 INSERT INTO `s_manager_daily_record` (`id`, `salesman_name`, `salesman_day_Sale`, `salesman_cnic`, `salesman_id`, `s_manager_id`, `created_at`) VALUES
-(1, 'ijal', 400, '12345-12345678-4', 2, 1, '2021-07-27');
+(1, 'ijal', 400, '12345-12345678-4', 2, 1, '2021-08-10');
 
 -- --------------------------------------------------------
 
@@ -294,6 +335,12 @@ ALTER TABLE `city_manager_record`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `city_manager_weekly_record`
+--
+ALTER TABLE `city_manager_weekly_record`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `medicine`
 --
 ALTER TABLE `medicine`
@@ -361,7 +408,13 @@ ALTER TABLE `city_manager`
 -- AUTO_INCREMENT for table `city_manager_record`
 --
 ALTER TABLE `city_manager_record`
-  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `city_manager_weekly_record`
+--
+ALTER TABLE `city_manager_weekly_record`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `medicine`
@@ -391,7 +444,7 @@ ALTER TABLE `sales_m_return`
 -- AUTO_INCREMENT for table `store_manager`
 --
 ALTER TABLE `store_manager`
-  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `s_manager_daily_record`
@@ -415,7 +468,7 @@ ALTER TABLE `s_manager_return_record`
 -- AUTO_INCREMENT for table `s_manager_weekly_record`
 --
 ALTER TABLE `s_manager_weekly_record`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
