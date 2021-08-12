@@ -2,7 +2,10 @@
 include "../db.php";
 
 session_start();
- $_SESSION['city'];
+  $_SESSION['city'];
+ $_SESSION['id'];
+ 
+
 
 
 if (!$_SESSION['email']) {
@@ -14,6 +17,8 @@ if (isset($_POST['logout'])) {
   session_destroy();
   unset($_SESSION['email']);
   unset($_SESSION['city']);
+  unset($_SESSION['id']);
+
   header("location:../citymanagerLogin.php");
 }
 
