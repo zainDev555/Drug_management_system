@@ -28,10 +28,10 @@ include "./layouts/navbar.php";
                  
                     
                      <input type="text" class="form-control" name="salesman_cnic" id="salesman_cnic" placeholder="Enter salesman CNIC  Like 25411-1456987-2 except space">
-                    <label for=""> week start from</label>
-                     <input type="date" class="form-control" name="date_1" id="date_1" placeholder="Week start day">
+                    <label for=""> Month start from</label>
+                     <input type="date" class="form-control" name="date_1" id="date_1" placeholder="Month start day">
                      <label for=""> TO</label>
-                     <input type="date" class="form-control mb-2" name="date_2" id="date_2" placeholder="week end date">
+                     <input type="date" class="form-control mb-2" name="date_2" id="date_2" placeholder="Month end date">
                     <button class="btn btn-success" id="salesman_find_by_month">search</button>
                   
                   <form action="./function.php" method="post">

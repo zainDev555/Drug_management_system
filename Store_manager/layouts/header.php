@@ -3,6 +3,9 @@ include "../db.php";
 
 session_start();
 $_SESSION['city'];
+ $_SESSION['id'];
+ 
+
 if (!$_SESSION['email']) {
 
   header("location:../StoreManagerLogin.php");

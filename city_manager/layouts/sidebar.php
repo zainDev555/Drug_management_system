@@ -33,7 +33,7 @@
           <?php 
           
 
-echo "you manage ".$_SESSION['city']."  city"; ?>
+            echo "you manage ".$_SESSION['city']."  city"; ?>
 
         </div>
       </div>
