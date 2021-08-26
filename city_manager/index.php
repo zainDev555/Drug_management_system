@@ -28,7 +28,7 @@ include "./layouts/navbar.php";
                 
                  
                     
-                <input type="text" class="form-control" required name="storemanager_cnic" id="storemanager_cnic" placeholder="Enter storemanager CNIC  Like 25411-1456987-2 except space">
+                <input type="text" class="form-control" required name="storemanager_cnic" id="storemanager_cnic" placeholder="storemanager CNIC  Like 25411-1456987-2 except space">
                     <input type="hidden" class="form-control" required name="city" id="city" value=" <?php echo $_SESSION['city']; ?>" >
                     <button class="btn btn-success" id="store_manager_find">search</button>
                   <h4>Today <b>"<?php echo date("y-m-d");?>"</b> search</h4>

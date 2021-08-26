@@ -10,7 +10,7 @@
             <i class="fas fa-medkit fa-fw me-3"></i><span style="font-size: 12px!important;">Salesman weekly sales </span>
           </a>
           <a href="./monthlysale.php" class="list-group-item list-group-item-action py-2 ripple ">
-            <i class="fas fa-medkit fa-fw me-3"></i><span style="font-size: 12px!important;">Salesman monthly sales </span>
+            <i class="fas fa-medkit fa-fw me-3"></i><span style="font-size: 12px!important;">Salesman monthly/yearly  sales </span>
           </a>
           <a href="./salesreturn.php" class="list-group-item list-group-item-action py-2 ripple ">
             <i class="fas fa-medkit fa-fw me-3"></i><span style="font-size: 12px!important;">Salesmans  return  </span>

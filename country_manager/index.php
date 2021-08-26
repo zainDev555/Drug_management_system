@@ -34,6 +34,7 @@ include "./layouts/navbar.php";
                       <input type="hidden" class="form-control" required name="city_manager_id" value=" <?php echo $_SESSION['id']; ?>">
                       <input type="hidden" class="form-control" required name="citymanager_cnic" id="citymanager_cnic"  />
                       <input type="hidden" class="form-control" required name="citymanager_id" id="citymanager_id"  />
+                      <input type="hidden" class="form-control" required name="city" id="city"  />
 
                     </div>
                     <div class="form-group">
@@ -61,6 +62,7 @@ include "./layouts/navbar.php";
             <thead>
               <tr>
                 <th scope="col">city Manager Name</th>
+                <th scope="col">city </th>
                 <th scope="col">city Manager CNIC</th>
                 <th scope="col">city Manager Daily sale</th>
                
@@ -81,6 +83,7 @@ include "./layouts/navbar.php";
 
                                 <tr>
                                   <td><?php echo $row['c_m_name']; ?></td>
+                                  <td><?php echo $row['city']; ?></td>
                                     <th scope="row"><?php echo $row['citymanager_cnic']; ?></th>
                                     <td><?php echo $row['city_m_daily_sale']; ?></td>
                                     <td><?php echo $row['created_at']; ?></td>
@@ -125,6 +128,7 @@ include "./layouts/navbar.php";
               //  2021-07-27
                 }
                $("#c_m_name").val(myObj.citymanager_name)
+               $("#city").val(myObj.city)
                $("#citymanager_cnic").val(s_cnic)
                $("#citymanager_id").val(myObj.citymanager_id)
                 

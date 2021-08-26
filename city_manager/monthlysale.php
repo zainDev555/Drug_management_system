@@ -27,7 +27,7 @@ include "./layouts/navbar.php";
                 
                  
                     
-                     <input type="text" class="form-control" name="salesman_cnic" id="salesman_cnic" placeholder="Enter salesman CNIC  Like 25411-1456987-2 except space">
+                     <input type="text" class="form-control" name="store_manager_cnic" id="store_manager_cnic" placeholder="Storemanager CNIC  Like 25411-1456987-2 except space">
                     <label for=""> Month start from</label>
                      <input type="date" class="form-control" name="date_1" id="date_1" placeholder="Month start day">
                      <label for=""> TO</label>
@@ -37,26 +37,26 @@ include "./layouts/navbar.php";
                   <form action="./function.php" method="post">
                     <div class="form-group">
                    
-                      <input type="hidden" class="form-control" name="s_manager_id" value=" <?php echo $_SESSION['id']; ?>">
-                      <input type="hidden" class="form-control" name="salesman_cnic" id="salesman_cnic_store"  />
-                      <input type="hidden" class="form-control" name="salesman_id" id="salesman_id"  />
+                      <input type="hidden" class="form-control" name="city_manager_id" value=" <?php echo $_SESSION['id']; ?>">
+                      <input type="hidden" class="form-control" name="store_manager_cnic" id="store_manager_cnic_store"  />
+                      <input type="hidden" class="form-control" name="store_manager_id" id="store_manager_id"  />
                       <input type="hidden" class="form-control" name="date_1" id="date_1_store"  />
                       <input type="hidden" class="form-control" name="date_2" id="date_2_store"  />
                     </div>
                     <div class="form-group">
-                      <label for="medicine">Salesman Name </label>
-                      <input type="text" class="form-control" name="salesman_name" id="salesman_name">
+                      <label for="medicine">store manager Name </label>
+                      <input type="text" class="form-control" name="store_manager_name" id="store_manager_name">
 
                     </div>
                   
                     <div class="form-group">
-                      <label for="medicine">selected monthly salesman sale </label>
-                      <input type="text" class="form-control" name="salesman_monthly_sale" id="salesman_monthly_sale">
+                      <label for="medicine">selected monthly store manager sale </label>
+                      <input type="text" class="form-control" name="store_manager_month_Sale" id="store_manager_month_Sale">
 
                     </div>
       
                     <div class="form-group">
-                      <button class="btn btn-info" type="submit" name="save_mounthly_sales_by_manager"> save</button>
+                      <button class="btn btn-info" type="submit" name="save_mounthly_sales_by_city_manager"> save</button>
 
                     </div>
 
@@ -69,10 +69,10 @@ include "./layouts/navbar.php";
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">salesman Name</th>
-                <th scope="col">salesman CNIC</th>
+                <th scope="col">store manager Name</th>
+                <th scope="col">store manager CNIC</th>
                 
-                <th scope="col">salesman weekly sale</th>
+                <th scope="col">store manager mounthly sale</th>
                 <th scope="col">From</th>
                 <th scope="col">TO </th>
                 <th scope="col">Save date</th>
@@ -82,7 +82,7 @@ include "./layouts/navbar.php";
             <?php
               
 
-                        $sql = "SELECT * FROM s_manager_monthly_record";
+                        $sql = "SELECT * FROM city_manager_monthly_record";
                         $result = $connect->query($sql);
 
                         if ($result->num_rows > 0) {
@@ -91,10 +91,10 @@ include "./layouts/navbar.php";
                             ?>
 
                                 <tr>
-                                  <td><?php echo $row['salesman_name']; ?></td>
-                                    <th scope="row"><?php echo $row['salesman_cnic']; ?></th>
+                                  <td><?php echo $row['store_manager_name']; ?></td>
+                                    <th scope="row"><?php echo $row['store_manager_cnic']; ?></th>
                           
-                                    <td><?php echo $row['salesman_month_sale']; ?></td>
+                                    <td><?php echo $row['store_manager_month_Sale']; ?></td>
                                     <td><?php echo $row['date_1']; ?></td>
                                     <td><?php echo $row['date_2']; ?></td>
                                     <td><?php echo $row['created_at']; ?></td>
@@ -122,8 +122,8 @@ include "./layouts/navbar.php";
       $.ajax({
         url:'./function.php',
         type:'post',
-        data:{ get_salesman_sales_monthly:{
-            salesman_cnic:$("#salesman_cnic").val(),
+        data:{ get_store_sales_monthly:{
+            store_manager_cnic:$("#store_manager_cnic").val(),
             date_1:$("#date_1").val(),
             date_2:$("#date_2").val(),
 
@@ -133,11 +133,11 @@ include "./layouts/navbar.php";
           const myObj = JSON.parse(res);
           console.log(res);
       
-        var s_cnic=$.trim(myObj.salesman_cnic)
-        $("#salesman_name").val(myObj.salesman_name)
-        $("#salesman_monthly_sale").val(myObj.salesman_month_Sale)
-        $("#salesman_cnic_store").val(s_cnic)
-        $("#salesman_id").val(myObj.salesman_id)
+        var s_cnic=$.trim(myObj.store_manager_cnic)
+        $("#store_manager_id").val(myObj.store_manager_id)
+        $("#store_manager_month_Sale").val(myObj.store_manager_month_Sale)
+        $("#store_manager_cnic_store").val(s_cnic)
+        $("#store_manager_name").val(myObj.store_manager_name)
         $("#date_1_store").val(myObj.date_1)
       $("#date_2_store").val(myObj.date_2)
         

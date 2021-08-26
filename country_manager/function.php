@@ -1,24 +1,7 @@
 
 <?php
 include "../db.php";
-if (isset($_POST['save_data'])) {
-  $b_cat = $_POST['b_cat'];
-  $b_company = $_POST['b_company'];
-  $b_rent_hour = $_POST['b_rent_hour'];
-  $br_price = $_POST['br_price'];
 
-
-  $sql = "INSERT INTO bikes (b_cat, b_company, b_rent_hour,br_price)
-    VALUES ('$b_cat', '$b_company', '$b_rent_hour','$br_price')";
-
-  if ($connect->query($sql) === TRUE) {
-    echo '<script type="text/javascript">alert("added now")
-        window.location.href="./index.php"
-        </script>';
-  } else {
-    echo "Error: " . $sql . "<br>" . $connect->error;
-  }
-}
 //start of get daily date data
 if (isset($_POST['get_citymanager_daily_sales'])) {
   $get_citymanager_daily_sales = trim($_POST['get_citymanager_daily_sales']['cnic'], ' ');
@@ -54,7 +37,7 @@ if (isset($_POST['get_citymanager_daily_sales'])) {
 
 
           $res = [
-            "citymanager_name" => "$row[name]", "citymanager_day_sale" => "$sum_daily", "citymanager_cnic" => "$row[cnic]", "citymanager_id" => "$row[id]",
+            "citymanager_name" => "$row[name]","city" => "$row[city]", "citymanager_day_sale" => "$sum_daily", "citymanager_cnic" => "$row[cnic]", "citymanager_id" => "$row[id]",
           ];
           echo json_encode($res);
         }
@@ -62,7 +45,7 @@ if (isset($_POST['get_citymanager_daily_sales'])) {
     }
   } else {
     $res = [
-      "citymanager_name" => "", "citymanager_day_sale" => "", "citymanager_cnic" => "", "citymanager_id" => "",
+      "citymanager_name" => "", "city" => "","citymanager_day_sale" => "", "citymanager_cnic" => "", "citymanager_id" => "",
 
    
     ];
@@ -77,9 +60,10 @@ if (isset($_POST['save_daily_sales_by_country_manager'])) {
   $c_m_name = $_POST['c_m_name'];
   $city_m_daily_sale = $_POST['city_m_daily_sale'];
   $citymanager_cnic = $_POST['citymanager_cnic'];
+  $city = $_POST['city'];
 
-  $sql = "INSERT INTO country_manager_daily_reord (c_m_name, citymanager_cnic,city_m_daily_sale,city_manager_id)
-        VALUES ('$c_m_name', '$citymanager_cnic', '$city_m_daily_sale','$city_manager_id')";
+  $sql = "INSERT INTO country_manager_daily_reord (c_m_name,city, citymanager_cnic,city_m_daily_sale,city_manager_id)
+        VALUES ('$c_m_name','$city' ,'$citymanager_cnic', '$city_m_daily_sale','$city_manager_id')";
 
   if ($connect->query($sql) === TRUE) {
     echo '<script type="text/javascript">alert("Daily sale Add now..!")
@@ -91,27 +75,27 @@ if (isset($_POST['save_daily_sales_by_country_manager'])) {
 }
 //daily sale end
 //start of get weekly date data
-if (isset($_POST['get_storemanager_sales_weekly'])) {
+if (isset($_POST['get_city_manager_sales_weekly'])) {
  
-  $store_manger_cnic =  $_POST['get_storemanager_sales_weekly']["storemanager_cnic"];
-  $store_manger_city =  $_POST['get_storemanager_sales_weekly']["city"];
-  $date_1 =  date('y-m-d',strtotime($_POST['get_storemanager_sales_weekly']["date_1"]));
-  $date_2 = date('y-m-d', strtotime($_POST['get_storemanager_sales_weekly']["date_2"]));
+  $city_manager_cnic =  $_POST['get_city_manager_sales_weekly']["city_manager_cnic"];
+  $country =  $_POST['get_city_manager_sales_weekly']["country"];
+  $date_1 =  date('y-m-d',strtotime($_POST['get_city_manager_sales_weekly']["date_1"]));
+  $date_2 = date('y-m-d', strtotime($_POST['get_city_manager_sales_weekly']["date_2"]));
 
 
 
 
-  $sql = "SELECT * FROM store_manager
-  WHERE cnic='$store_manger_cnic' AND city='$store_manger_city'";
+  $sql = "SELECT * FROM city_manager
+  WHERE cnic='$city_manager_cnic' AND country='$country'";
   $result = $connect->query($sql);
 
   if ($result->num_rows > 0) {
 
     while ($row = $result->fetch_assoc()) {
-      $s_manager_id = $row['id'];
+      $city_manager_id = $row['id'];
 
-      $sql1 = "SELECT * FROM s_manager_daily_record
-      WHERE s_manager_id='$s_manager_id'";
+      $sql1 = "SELECT * FROM city_manager_record
+      WHERE city_m_id='$city_manager_id'";
       $result = $connect->query($sql1);
       if ($result->num_rows > 0) {
 
@@ -120,8 +104,8 @@ if (isset($_POST['get_storemanager_sales_weekly'])) {
           // salesman_weekly_sale
 
 
-          $sql3 = "SELECT sum(salesman_day_Sale) as weekly_sum FROM s_manager_daily_record
-      WHERE s_manager_id='$row[id]' AND created_at BETWEEN '$date_1' AND '$date_2'";
+          $sql3 = "SELECT sum(s_m_daily_sale) as weekly_sum FROM city_manager_record
+      WHERE city_m_id='$row[id]' AND created_at BETWEEN '$date_1' AND '$date_2'";
 
           $result = $connect->query($sql3);
 
@@ -133,8 +117,8 @@ if (isset($_POST['get_storemanager_sales_weekly'])) {
           }
 
           $res = [
-            "storemanager_name" => "$row[name]", "storemanager_weekly_Sale" => "$sum_week",
-            "date_1" => "$date_1", "date_2" => "$date_2", "storemanager_cnic" => "$row[cnic]", "storemanager_id" => "$row[id]",
+            "city_manager_name" => "$row[name]","city" => "$row[city]", "city_manager_weekly_Sale" => "$sum_week",
+            "date_1" => "$date_1", "date_2" => "$date_2", "city_manager_cnic" => "$row[cnic]", "city_manager_id" => "$row[id]",
           ];
           echo json_encode($res);
         }
@@ -142,8 +126,8 @@ if (isset($_POST['get_storemanager_sales_weekly'])) {
     }
   } else {
     $res = [
-      "storemanager_name" => "", "storemanager_weekly_Sale" => "",
-      "date_1" => "", "date_2" => "", "storemanager_cnic" => "", "storemanager_id" => "",
+      "city_manager_name" => "","city" => "", "city_manager_weekly_Sale" => "",
+      "date_1" => "", "date_2" => "", "city_manager_cnic" => "", "city_manager_id" => "",
     ];
     echo json_encode($res);
   }
@@ -151,21 +135,22 @@ if (isset($_POST['get_storemanager_sales_weekly'])) {
 //end of get weekly date data
 //start of store weekly  data by manager
 
-if (isset($_POST['save_weekly_sales_by_store_manager'])) {
+if (isset($_POST['save_weekly_sales_by_city_manager'])) {
 
 // var_dump($_REQUEST);die();
  
-$s_m_name = $_POST['s_m_name'];
-$s_m_weekly_sale = $_POST['storemanager_weekly_sale'];
+$city_m_name = $_POST['city_m_name'];
+$city = $_POST['city'];
+$city_manager_weekly_sale = $_POST['city_manager_weekly_sale'];
 // $salesman_mounthly_sale=$_POST['salesman_mounthly_sale']; 
-$s_m_cnic = $_POST['s_m_cnic'];
-$s_m_id = $_POST['storemananger_id'];
+$city_manager_cnic = $_POST['city_manager_cnic'];
+$city_manager_id = $_POST['city_manager_id'];
 $date_1 = $_POST['date_1'];
 $date_2 = $_POST['date_2'];
-$city_manager_id = $_POST['city_manager_id'];
 
-  $sql = "INSERT INTO city_manager_weekly_record (s_m_name, s_m_cnic,s_m_weekly_sale,s_m_id,city_manager_id,date_1,date_2)
-        VALUES ('$s_m_name', '$s_m_cnic', '$s_m_weekly_sale','$s_m_id','$city_manager_id','$date_1','$date_2')";
+
+  $sql = "INSERT INTO country_manager_weekly_reord (city_m_name,city, city_manager_cnic,city_manager_weekly_sale,city_manager_id,date_1,date_2)
+        VALUES ('$city_m_name','$city', '$city_manager_cnic', '$city_manager_weekly_sale','$city_manager_id','$date_1','$date_2')";
 
   if ($connect->query($sql) === TRUE) {
     echo '<script type="text/javascript">alert("weekly record save ..!")
@@ -177,26 +162,26 @@ $city_manager_id = $_POST['city_manager_id'];
 }
 //end of store weekly  data by manager
 //start of get monthly data by manager
-if (isset($_POST['get_salesman_sales_monthly'])) {
+if (isset($_POST['get_city_sales_monthly'])) {
 
-  $salesman_cnic =  trim($_POST['get_salesman_sales_monthly']["salesman_cnic"]," ");
-  $date_1 =  $_POST['get_salesman_sales_monthly']["date_1"];
-  $date_2 =  $_POST['get_salesman_sales_monthly']["date_2"];
-
-
+  $city_manager_cnic =  trim($_POST['get_city_sales_monthly']["city_manager_cnic"]," ");
+  $date_1 =  $_POST['get_city_sales_monthly']["date_1"];
+  $date_2 =  $_POST['get_city_sales_monthly']["date_2"];
 
 
-  $sql = "SELECT * FROM sales_manager
-   WHERE cnic='$salesman_cnic'";
+
+
+  $sql = "SELECT * FROM city_manager
+   WHERE cnic='$city_manager_cnic'";
   $result = $connect->query($sql);
 
   if ($result->num_rows > 0) {
 
     while ($row = $result->fetch_assoc()) {
-      $salesmas_id = $row['id'];
+      $city_m_id = $row['id'];
 
-      $sql1 = "SELECT * FROM sales_medicine
-       WHERE salesman_id='$salesmas_id'";
+      $sql1 = "SELECT * FROM country_manager_daily_reord
+       WHERE city_manager_id='$city_m_id'";
       $result = $connect->query($sql1);
       if ($result->num_rows > 0) {
 
@@ -205,8 +190,8 @@ if (isset($_POST['get_salesman_sales_monthly'])) {
 
           // salesman_mounthly_sale
 
-          $sql4 = "SELECT sum(sm_price) as month_sum FROM sales_medicine
-          WHERE salesman_id='$row[id]' AND created_at BETWEEN '$date_1' AND '$date_2'";
+          $sql4 = "SELECT sum(city_m_daily_sale) as month_sum FROM country_manager_daily_reord
+          WHERE city_manager_id='$row[id]' AND created_at BETWEEN '$date_1' AND '$date_2'";
 
           $result = $connect->query($sql4);
 
@@ -219,8 +204,8 @@ if (isset($_POST['get_salesman_sales_monthly'])) {
           // salesman_mounthly_sale
 
           $res = [
-            "storemanager_name" => "$row[name]", "storemanager_month_Sale" => "$sum_mounth",
-            "storemanager_cnic" => "$row[cnic]", "storemanager_id" => "$row[id]",
+            "city_manager_name" => "$row[name]","city" => "$row[city]", "city_manager_month_Sale" => "$sum_mounth",
+            "city_manager_cnic" => "$row[cnic]", "city_manager_id" => "$row[id]",
             "date_1" => "$date_1", "date_2" => "$date_2",
           ];
           echo json_encode($res);
@@ -229,29 +214,27 @@ if (isset($_POST['get_salesman_sales_monthly'])) {
     }
   } else {
     $res = [
-      "storemanager_name" => "", "storemanager_month_Sale" => "", "storemanager_cnic" => "",
-      "date_1" => "", "date_2" => "", "storemanager_id" => "",
+      "city_manager_name" => "","city" => "", "city_manager_month_Sale" => "", "city_manager_cnic" => "",
+      "date_1" => "", "date_2" => "", "city_manager_id" => "",
     ];
     echo json_encode($res);
   }
 }
 //end of get monthly data by manager
 //start of store monthly data by manager
-if (isset($_POST['save_mounthly_sales_by_manager'])) {
+if (isset($_POST['save_mounthly_sales_by_country_m'])) {
 
-
-  $s_manager_id = $_POST['s_manager_id'];
-  $salesman_name = $_POST['salesman_name'];
-  $salesman_month_sale = $_POST['salesman_monthly_sale'];
-  $s_manager_id = $_POST['s_manager_id'];
-  // $salesman_mounthly_sale=$_POST['salesman_mounthly_sale']; 
-  $salesman_id = $_POST['salesman_id'];
-  $salesman_cnic = $_POST['salesman_cnic'];
+// var_dump($_REQUEST);die();
+  $city_manager_id = $_POST['city_manager_id'];
+  $city_manager_cnic = $_POST['city_manager_cnic'];
+  $city = $_POST['city'];
+  $city_manager_name = $_POST['city_manager_name'];
+  $city_manager_month_Sale = $_POST['city_manager_month_Sale'];
   $date_1 = $_POST['date_1'];
   $date_2 = $_POST['date_2'];
 
-  $sql = "INSERT INTO s_manager_monthly_record (salesman_name, salesman_cnic,salesman_month_sale,salesman_id,s_manager_id,date_1,date_2)
-        VALUES ('$salesman_name', '$salesman_cnic', '$salesman_month_sale','$salesman_id','$s_manager_id','$date_1','$date_2')";
+  $sql = "INSERT INTO country_manager_monthly_reord (city_manager_name,city, city_manager_cnic,city_manager_month_Sale,city_manager_id,date_1,date_2)
+        VALUES ('$city_manager_name','$city', '$city_manager_cnic', '$city_manager_month_Sale','$city_manager_id','$date_1','$date_2')";
 
   if ($connect->query($sql) === TRUE) {
     echo '<script type="text/javascript">alert("mounthly record save ..!")

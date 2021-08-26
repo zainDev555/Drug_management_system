@@ -19,13 +19,13 @@
             <i class="fas fa-medkit fa-fw me-3"></i><span style="font-size: 12px!important;" >country daily sales </span>
           </a>
           <a href="./weeklysale.php" class="check_hover list-group-item list-group-item-action py-2 ripple ">
-            <i class="fas fa-medkit fa-fw me-3"></i><span style="font-size: 12px!important;">Storemanager weekly sales </span>
+            <i class="fas fa-medkit fa-fw me-3"></i><span style="font-size: 12px!important;">country weekly sales </span>
           </a>
           <a href="./monthlysale.php" class="check_hover list-group-item list-group-item-action py-2 ripple ">
-            <i class="fas fa-medkit fa-fw me-3"></i><span style="font-size: 12px!important;">Storemanager monthly sales </span>
+            <i class="fas fa-medkit fa-fw me-3"></i><span style="font-size: 12px!important;">country monthly/yearly sales </span>
           </a>
           <a href="./salesreturn.php" class="check_hover list-group-item list-group-item-action py-2 ripple ">
-            <i class="fas fa-medkit fa-fw me-3"></i><span style="font-size: 12px!important;">Storemanagers  return  </span>
+            <i class="fas fa-medkit fa-fw me-3"></i><span style="font-size: 12px!important;">country  return  </span>
           </a>
           <a href="./cityManager_add.php" class="check_hover list-group-item list-group-item-action py-2 ripple ">
             <i class="fas fa-users fa-fw me-3"></i><span style="font-size: 12px!important;">City manager add  </span>

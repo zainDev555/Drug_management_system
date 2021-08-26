@@ -16,16 +16,16 @@
         <div class="list-group list-group-flush mx-3 mt-4" >
       
         <a href="./index.php" class="check_hover list-group-item list-group-item-action py-2 ripple ">
-            <i class="fas fa-medkit fa-fw me-3"></i><span style="font-size: 12px!important;" >Storemanager daily sales </span>
+            <i class="fas fa-medkit fa-fw me-3"></i><span style="font-size: 12px!important;" >City daily sales </span>
           </a>
           <a href="./weeklysale.php" class="check_hover list-group-item list-group-item-action py-2 ripple ">
-            <i class="fas fa-medkit fa-fw me-3"></i><span style="font-size: 12px!important;">Storemanager weekly sales </span>
+            <i class="fas fa-medkit fa-fw me-3"></i><span style="font-size: 12px!important;">City weekly sales </span>
           </a>
           <a href="./monthlysale.php" class="check_hover list-group-item list-group-item-action py-2 ripple ">
-            <i class="fas fa-medkit fa-fw me-3"></i><span style="font-size: 12px!important;">Storemanager monthly sales </span>
+            <i class="fas fa-medkit fa-fw me-3"></i><span style="font-size: 12px!important;">City monthly/yearly  sales </span>
           </a>
           <a href="./salesreturn.php" class="check_hover list-group-item list-group-item-action py-2 ripple ">
-            <i class="fas fa-medkit fa-fw me-3"></i><span style="font-size: 12px!important;">Storemanagers  return  </span>
+            <i class="fas fa-medkit fa-fw me-3"></i><span style="font-size: 12px!important;">City   return  </span>
           </a>
           <a href="./StoreManager_add.php" class="check_hover list-group-item list-group-item-action py-2 ripple ">
             <i class="fas fa-users fa-fw me-3"></i><span style="font-size: 12px!important;">Storemanager add  </span>

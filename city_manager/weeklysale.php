@@ -27,7 +27,7 @@ include "./layouts/navbar.php";
                 
                  
                     
-                <input type="text" class="form-control" name="storemanager_cnic" id="storemanager_cnic" placeholder="Enter salesman CNIC  Like 25411-1456987-2 except space">
+                <input type="text" class="form-control" name="storemanager_cnic" id="storemanager_cnic" placeholder="storemanager CNIC  Like 25411-1456987-2 except space">
                 <input type="hidden" class="form-control" required name="city" id="city" value="<?php echo $_SESSION['city']; ?>" >
                     <label for=""> week start from</label>
                      <input type="date" class="form-control " name="date_1" id="date_1"  

@@ -184,26 +184,26 @@ $city_manager_id = $_POST['city_manager_id'];
 }
 //end of store weekly  data by manager
 //start of get monthly data by manager
-if (isset($_POST['get_salesman_sales_monthly'])) {
+if (isset($_POST['get_store_sales_monthly'])) {
 
-  $salesman_cnic =  trim($_POST['get_salesman_sales_monthly']["salesman_cnic"]," ");
-  $date_1 =  $_POST['get_salesman_sales_monthly']["date_1"];
-  $date_2 =  $_POST['get_salesman_sales_monthly']["date_2"];
-
-
+  $store_manager_cnic =  trim($_POST['get_store_sales_monthly']["store_manager_cnic"]," ");
+  $date_1 =  $_POST['get_store_sales_monthly']["date_1"];
+  $date_2 =  $_POST['get_store_sales_monthly']["date_2"];
 
 
-  $sql = "SELECT * FROM sales_manager
-   WHERE cnic='$salesman_cnic'";
+
+
+  $sql = "SELECT * FROM store_manager
+   WHERE cnic='$store_manager_cnic'";
   $result = $connect->query($sql);
 
   if ($result->num_rows > 0) {
 
     while ($row = $result->fetch_assoc()) {
-      $salesmas_id = $row['id'];
+      $store_manager_id = $row['id'];
 
-      $sql1 = "SELECT * FROM sales_medicine
-       WHERE salesman_id='$salesmas_id'";
+      $sql1 = "SELECT * FROM s_manager_daily_record
+       WHERE s_manager_id='$store_manager_id'";
       $result = $connect->query($sql1);
       if ($result->num_rows > 0) {
 
@@ -212,8 +212,8 @@ if (isset($_POST['get_salesman_sales_monthly'])) {
 
           // salesman_mounthly_sale
 
-          $sql4 = "SELECT sum(sm_price) as month_sum FROM sales_medicine
-          WHERE salesman_id='$row[id]' AND created_at BETWEEN '$date_1' AND '$date_2'";
+          $sql4 = "SELECT sum(salesman_day_Sale) as month_sum FROM s_manager_daily_record
+          WHERE s_manager_id='$row[id]' AND created_at BETWEEN '$date_1' AND '$date_2'";
 
           $result = $connect->query($sql4);
 
@@ -226,8 +226,8 @@ if (isset($_POST['get_salesman_sales_monthly'])) {
           // salesman_mounthly_sale
 
           $res = [
-            "storemanager_name" => "$row[name]", "storemanager_month_Sale" => "$sum_mounth",
-            "storemanager_cnic" => "$row[cnic]", "storemanager_id" => "$row[id]",
+            "store_manager_name" => "$row[name]", "store_manager_month_Sale" => "$sum_mounth",
+            "store_manager_cnic" => "$row[cnic]", "store_manager_id" => "$row[id]",
             "date_1" => "$date_1", "date_2" => "$date_2",
           ];
           echo json_encode($res);
@@ -236,29 +236,27 @@ if (isset($_POST['get_salesman_sales_monthly'])) {
     }
   } else {
     $res = [
-      "storemanager_name" => "", "storemanager_month_Sale" => "", "storemanager_cnic" => "",
-      "date_1" => "", "date_2" => "", "storemanager_id" => "",
+      "store_manager_name" => "", "store_manager_month_Sale" => "", "store_manager_cnic" => "",
+      "date_1" => "", "date_2" => "", "store_manager_id" => "",
     ];
     echo json_encode($res);
   }
 }
 //end of get monthly data by manager
 //start of store monthly data by manager
-if (isset($_POST['save_mounthly_sales_by_manager'])) {
+if (isset($_POST['save_mounthly_sales_by_city_manager'])) {
 
-
-  $s_manager_id = $_POST['s_manager_id'];
-  $salesman_name = $_POST['salesman_name'];
-  $salesman_month_sale = $_POST['salesman_monthly_sale'];
-  $s_manager_id = $_POST['s_manager_id'];
-  // $salesman_mounthly_sale=$_POST['salesman_mounthly_sale']; 
-  $salesman_id = $_POST['salesman_id'];
-  $salesman_cnic = $_POST['salesman_cnic'];
+// var_dump($_REQUEST);die();
+  $city_manager_id = $_POST['city_manager_id'];
+  $store_manager_name = $_POST['store_manager_name'];
+  $store_manager_month_Sale = $_POST['store_manager_month_Sale'];
+  $store_manager_id = $_POST['store_manager_id'];
+  $store_manager_cnic = $_POST['store_manager_cnic'];
   $date_1 = $_POST['date_1'];
   $date_2 = $_POST['date_2'];
 
-  $sql = "INSERT INTO s_manager_monthly_record (salesman_name, salesman_cnic,salesman_month_sale,salesman_id,s_manager_id,date_1,date_2)
-        VALUES ('$salesman_name', '$salesman_cnic', '$salesman_month_sale','$salesman_id','$s_manager_id','$date_1','$date_2')";
+  $sql = "INSERT INTO city_manager_monthly_record (store_manager_name, store_manager_cnic,store_manager_month_Sale,store_manager_id,city_manager_id,date_1,date_2)
+        VALUES ('$store_manager_name', '$store_manager_cnic', '$store_manager_month_Sale','$store_manager_id','$city_manager_id','$date_1','$date_2')";
 
   if ($connect->query($sql) === TRUE) {
     echo '<script type="text/javascript">alert("mounthly record save ..!")
