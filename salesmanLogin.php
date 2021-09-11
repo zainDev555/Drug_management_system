@@ -4,7 +4,8 @@
 <!-- Start your project here-->
 <div class="container">
     <div class="row">
-        <div class="col-md-12 " style="padding:10% 30%">
+        <div class="col-md-12 " style="padding:10% 10%">
+        <div class="card p-3" >
         <h4 class="text-center border-bottom mb-5">Salesman Login</h4>
             <form action="./function.php" method="post">
                 <!-- Email input -->
@@ -27,10 +28,16 @@
 
                 
             </form>
-            <a href="./salesmanLogin.php">-->go to Salesman</a><br>
-            <a href="./StoreManagerLogin.php">-->go to store Manager</a><br>
-            <a href="./citymanagerLogin.php">-->go to city Manager</a><br>
-            <a href="./country_manager_login.php">-->go to country Manager</a>
+            <h5>system Login ?</h5>
+            <div class="d-flex">
+
+                <a href="./salesmanLogin.php">Salesman</a>,&nbsp;&nbsp;
+                <a href="./StoreManagerLogin.php">store Manager</a>,&nbsp;&nbsp;
+                <a href="./citymanagerLogin.php"> city Manager</a>,&nbsp;&nbsp;
+                <a href="./country_manager_login.php">country Manager</a>,&nbsp;&nbsp;
+                <a href="./ceoLogin.php">Ceo</a>&nbsp;&nbsp;
+            </div>
+            </div>
         </div>
     </div>
 </div>

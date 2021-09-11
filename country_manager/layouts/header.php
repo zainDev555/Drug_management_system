@@ -44,6 +44,12 @@ if (isset($_POST['logout'])) {
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
 </head>
-
+<style>
+  table{
+    background-color: white;
+    padding: 10px;
+    box-shadow: 5px 5px 10px;
+  }
+</style>
 <body>
  

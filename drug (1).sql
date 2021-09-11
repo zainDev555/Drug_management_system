@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 12, 2021 at 09:13 AM
+-- Generation Time: Sep 11, 2021 at 09:56 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.4.22
 
@@ -20,6 +20,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `drug`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ceo`
+--
+
+CREATE TABLE `ceo` (
+  `id` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `email` text NOT NULL,
+  `cnic` text NOT NULL,
+  `phone` text NOT NULL,
+  `password` text NOT NULL,
+  `country` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ceo`
+--
+
+INSERT INTO `ceo` (`id`, `name`, `email`, `cnic`, `phone`, `password`, `country`) VALUES
+(1, 'ceo', 'ceo@ceo.com', '33145-5789687-3', '0312345678', '25d55ad283aa400af464c76d713c07ad', 'pakistan');
 
 -- --------------------------------------------------------
 
@@ -48,6 +71,31 @@ INSERT INTO `city_manager` (`id`, `name`, `email`, `cnic`, `phone`, `password`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `city_manager_monthly_record`
+--
+
+CREATE TABLE `city_manager_monthly_record` (
+  `id` int(11) NOT NULL,
+  `city_manager_id` int(250) NOT NULL,
+  `store_manager_cnic` text NOT NULL,
+  `store_manager_id` int(250) NOT NULL,
+  `store_manager_name` text NOT NULL,
+  `store_manager_month_Sale` int(250) NOT NULL,
+  `date_1` text NOT NULL,
+  `date_2` text NOT NULL,
+  `created_at` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `city_manager_monthly_record`
+--
+
+INSERT INTO `city_manager_monthly_record` (`id`, `city_manager_id`, `store_manager_cnic`, `store_manager_id`, `store_manager_name`, `store_manager_month_Sale`, `date_1`, `date_2`, `created_at`) VALUES
+(1, 1, '33521-5487888-2', 1, 'ijal', 400, '2021-07-27', '2021-08-31', '2021-08-27');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `city_manager_record`
 --
 
@@ -66,7 +114,7 @@ CREATE TABLE `city_manager_record` (
 --
 
 INSERT INTO `city_manager_record` (`id`, `c_m_name`, `s_m_daily_sale`, `s_m_cnic`, `s_m_id`, `city_m_id`, `created_at`) VALUES
-(1, 'ijal', 400, '33521-5487888-2', 1, 1, '2021-08-10');
+(1, 'ijal', 400, '33521-5487888-2', 1, 1, '2021-08-27');
 
 -- --------------------------------------------------------
 
@@ -92,6 +140,101 @@ CREATE TABLE `city_manager_weekly_record` (
 
 INSERT INTO `city_manager_weekly_record` (`id`, `s_m_name`, `s_m_weekly_sale`, `s_m_cnic`, `s_m_id`, `city_manager_id`, `date_1`, `date_2`, `created_at`) VALUES
 (1, 'ijal', 400, '33521-5487888-2', 1, 1, '21-08-04', '21-08-11', '2021-08-11');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `country_manager`
+--
+
+CREATE TABLE `country_manager` (
+  `id` int(250) NOT NULL,
+  `name` text NOT NULL,
+  `email` text NOT NULL,
+  `cnic` text NOT NULL,
+  `phone` text NOT NULL,
+  `password` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `country_manager`
+--
+
+INSERT INTO `country_manager` (`id`, `name`, `email`, `cnic`, `phone`, `password`) VALUES
+(1, 'countryManager', 'countryManager@countryManager.com', '33100-5896325-7', '03054789632', '25d55ad283aa400af464c76d713c07ad');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `country_manager_daily_reord`
+--
+
+CREATE TABLE `country_manager_daily_reord` (
+  `id` int(11) NOT NULL,
+  `city_manager_id` int(250) NOT NULL,
+  `citymanager_cnic` text NOT NULL,
+  `c_m_name` text NOT NULL,
+  `city` text NOT NULL,
+  `city_m_daily_sale` int(250) NOT NULL,
+  `created_at` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `country_manager_daily_reord`
+--
+
+INSERT INTO `country_manager_daily_reord` (`id`, `city_manager_id`, `citymanager_cnic`, `c_m_name`, `city`, `city_m_daily_sale`, `created_at`) VALUES
+(3, 1, '11100-5487963-2', 'city_manager', 'Lahore', 400, '2021-08-26');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `country_manager_monthly_reord`
+--
+
+CREATE TABLE `country_manager_monthly_reord` (
+  `id` int(11) NOT NULL,
+  `city_manager_id` int(250) NOT NULL,
+  `city_manager_cnic` text NOT NULL,
+  `city_manager_name` text NOT NULL,
+  `city` text NOT NULL,
+  `city_manager_month_Sale` int(250) NOT NULL,
+  `date_1` text NOT NULL,
+  `date_2` text NOT NULL,
+  `created_at` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `country_manager_monthly_reord`
+--
+
+INSERT INTO `country_manager_monthly_reord` (`id`, `city_manager_id`, `city_manager_cnic`, `city_manager_name`, `city`, `city_manager_month_Sale`, `date_1`, `date_2`, `created_at`) VALUES
+(1, 1, '11100-5487963-2', 'city_manager', 'Lahore', 400, '2021-08-01', '2021-08-31', '2021-08-27');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `country_manager_weekly_reord`
+--
+
+CREATE TABLE `country_manager_weekly_reord` (
+  `id` int(11) NOT NULL,
+  `city_manager_id` int(250) NOT NULL,
+  `city_manager_cnic` text NOT NULL,
+  `city_m_name` text NOT NULL,
+  `city` text NOT NULL,
+  `city_manager_weekly_sale` int(250) NOT NULL,
+  `date_1` text NOT NULL,
+  `date_2` text NOT NULL,
+  `created_at` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `country_manager_weekly_reord`
+--
+
+INSERT INTO `country_manager_weekly_reord` (`id`, `city_manager_id`, `city_manager_cnic`, `city_m_name`, `city`, `city_manager_weekly_sale`, `date_1`, `date_2`, `created_at`) VALUES
+(3, 1, '11100-5487963-2', 'city_manager', 'Lahore', 400, '21-08-19', '21-08-26', '2021-08-26');
 
 -- --------------------------------------------------------
 
@@ -323,9 +466,21 @@ INSERT INTO `s_manager_weekly_record` (`id`, `salesman_name`, `salesman_weekly_s
 --
 
 --
+-- Indexes for table `ceo`
+--
+ALTER TABLE `ceo`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `city_manager`
 --
 ALTER TABLE `city_manager`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `city_manager_monthly_record`
+--
+ALTER TABLE `city_manager_monthly_record`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -338,6 +493,30 @@ ALTER TABLE `city_manager_record`
 -- Indexes for table `city_manager_weekly_record`
 --
 ALTER TABLE `city_manager_weekly_record`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `country_manager`
+--
+ALTER TABLE `country_manager`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `country_manager_daily_reord`
+--
+ALTER TABLE `country_manager_daily_reord`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `country_manager_monthly_reord`
+--
+ALTER TABLE `country_manager_monthly_reord`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `country_manager_weekly_reord`
+--
+ALTER TABLE `country_manager_weekly_reord`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -399,9 +578,21 @@ ALTER TABLE `s_manager_weekly_record`
 --
 
 --
+-- AUTO_INCREMENT for table `ceo`
+--
+ALTER TABLE `ceo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `city_manager`
 --
 ALTER TABLE `city_manager`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `city_manager_monthly_record`
+--
+ALTER TABLE `city_manager_monthly_record`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
@@ -415,6 +606,30 @@ ALTER TABLE `city_manager_record`
 --
 ALTER TABLE `city_manager_weekly_record`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `country_manager`
+--
+ALTER TABLE `country_manager`
+  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `country_manager_daily_reord`
+--
+ALTER TABLE `country_manager_daily_reord`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `country_manager_monthly_reord`
+--
+ALTER TABLE `country_manager_monthly_reord`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `country_manager_weekly_reord`
+--
+ALTER TABLE `country_manager_weekly_reord`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `medicine`

@@ -17,6 +17,6 @@
     <!-- MDB -->
     <link rel="stylesheet" href="./assets/css/mdb.min.css" />
   </head>
-  <body>
+  <body style="background-color: lightgrey;">
    
  
