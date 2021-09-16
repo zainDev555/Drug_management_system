@@ -35,7 +35,7 @@ include "./layouts/navbar.php";
                       <label for="medicine">Medicine Name </label>
                       <select name="sm_name" id="m_ids" class="form-control" required>
                         <option selected disabled> -------------------------select medicine pleas----------------</option>
-                    <?php  $sql = "SELECT m_name FROM medicine where salesman_id='$_SESSION[id]'";
+                    <?php  $sql = "SELECT m_name FROM medicine ";
                         $result = $connect->query($sql);
 
                         if ($result->num_rows > 0) {
@@ -54,17 +54,17 @@ include "./layouts/navbar.php";
                     <div class="form-group">
                       <label for="medicine">Medicine ID </label>
                       <input type="text" id="sm_id" name="sm_id" class="form-control" required  >
-
+                     
                     </div>
                     <div class="form-group">
                       <label for="medicine">Medicine QTY </label>
-                      <input type="number" class="form-control" required name="sm_qty">
+                      <input type="number" class="form-control" required name="sm_qty" id="sm_qty">
 
                     </div>
                     <div class="form-group">
                       <label for="medicine">Medicine price </label>
-                      <input type="number" class="form-control" required name="sm_price">
-
+                      <input type="text" id="sm_price" name="sm_price" class="form-control" required  >
+                      
                     </div>
                  
                     <div class="form-group">
@@ -94,7 +94,7 @@ include "./layouts/navbar.php";
             <?php
               
 
-                        $sql = "SELECT * FROM sales_medicine where salesman_id='$_SESSION[id]'";
+                        $sql = "SELECT * FROM sales_medicine ";
                         $result = $connect->query($sql);
 
                         if ($result->num_rows > 0) {
@@ -128,17 +128,47 @@ include "./layouts/navbar.php";
 
   </div>
   <script>
+    // $("#sm_qty").val(1) 
+     $('#sm_qty').on("change",function(){
+      $.ajax({
+        url:'./function.php',
+        type:'post',
+        data:{set_qty:$("#sm_id").val()},
+        success:function(res)
+        {
+          const  data = JSON.parse(res)
+         
+     
+              
+           let final_price = $("#sm_qty").val() * data[1];
+            if(final_price < 0){
+              alert("wrong input")
+            }else{
+
+              $("#sm_price").val(final_price);
+            }
+          }
+      });
+    
+
+         })
     $('#m_ids').on("change",function(){
       
       $.ajax({
         url:'./function.php',
         type:'post',
         data:{get_medicine_data_id:$("#m_ids").val()},
-        success:function(res){
-            $("#sm_id").val(res);
-        }
+        success:function(res)
+        {
+          const  data = JSON.parse(res)
+          const just_one=1;
+            $("#sm_id").val(data.m_id);
+            $("#sm_price").val(data[1]);
+            
+           
+          }
       });
-      
+     
 
     });
   </script>

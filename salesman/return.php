@@ -26,12 +26,15 @@ include "./layouts/navbar.php";
 
 
                 
-                    <input type="number" name="sm_id" id="sm_id"placeholder="Enter order ID "><button class="btn btn-success"  id="sm_ids" type="button">search</button>
+                    <input type="number" name="sm_id" id="sm_id"placeholder="Enter order ID  " require>
+                    <input type="text"  id="sm_name" placeholder="Enter medicine name " require>
+                    <input type="number"  id="sm_qty" placeholder="Enter medicine qty " require>
+                    <button class="btn btn-success"  id="sm_ids" type="button">search</button>
                
                   <form action="./function.php" method="post">
                     <div class="form-group">
                    
-                    <input type="hidden" class="form-control" required name="salesman_id" value=" <?php echo $_SESSION['id']; ?>">
+                    <input type="hidden" class="form-control" required name="salesman_id" id="salesman_id" value=" <?php echo $_SESSION['id']; ?>">
                       <input type="hidden" class="form-control" required name="id" id="id">
 
                     </div>
@@ -84,7 +87,7 @@ include "./layouts/navbar.php";
             <?php
               
 
-                        $sql = "SELECT * FROM sales_m_return where salesman_id='$_SESSION[id]'";
+                        $sql = "SELECT * FROM sales_m_return";
                         $result = $connect->query($sql);
 
                         if ($result->num_rows > 0) {
@@ -121,14 +124,27 @@ include "./layouts/navbar.php";
       $.ajax({
         url:'./function.php',
         type:'post',
-        data:{get_medicine_data_id_for_return:$("#sm_id").val()},
+        data:{get_medicine_data_id_for_return:{
+         sm_id: $("#sm_id").val(),
+         sm_name: $("#sm_name").val(),
+         sm_name: $("#sm_name").val(),
+         sm_qty: $("#sm_qty").val(),
+        }
+      },
         success:function(res){
-            const myObj = JSON.parse(res);
-            $("#id").val(myObj.id);
-            $("#rm_name").val(myObj.sm_name);
-            $("#rm_id").val(myObj.sm_id);
-            $("#rm_price").val(myObj.sm_price);
-            $("#rm_qty").val(myObj.sm_qty);
+          console.log(JSON.parse(res))
+          const  data = JSON.parse(res)
+          console.log(res)
+          if(data.id){
+
+            $("#id").val(data.id);
+            $("#rm_name").val(data.sm_name);
+            $("#rm_id").val(data.sm_id);
+            $("#rm_price").val(data.sm_price);
+            $("#rm_qty").val(data.sm_qty);
+          }else{
+            alert("no data found ")
+          }
         
           
         }

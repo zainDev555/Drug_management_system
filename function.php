@@ -17,7 +17,7 @@ if(isset($_POST['sales_log_in'])){
             
 
             // Add values to the session.
-            $_SESSION['email'] = $email; // string
+            $_SESSION['name'] = $name; // string
             $_SESSION['id'] = $row['id']; // string
             $_SESSION['city'] = $row['city']; // string
             $_SESSION['branch_name'] = $row['branch_name']; // string
@@ -120,7 +120,7 @@ if(isset($_POST['country_manager_log_in'])){
     }else {
     
         echo '<script language="javascript">  alert("invalid Credientials");</script>';
-        echo '<script language="javascript">       window.location.href = "./country_manager_login.php.php";</script>';
+        echo '<script language="javascript">       window.location.href = "./country_manager_login.php";</script>';
       
         
     }
@@ -151,7 +151,38 @@ if(isset($_POST['ceo_log_in'])){
     }else {
     
         echo '<script language="javascript">  alert("invalid Credientials");</script>';
-        echo '<script language="javascript">       window.location.href = "./ceoLogin.php.php";</script>';
+        echo '<script language="javascript">       window.location.href = "./ceoLogin.php";</script>';
+      
+        
+    }
+}
+//admin login
+if(isset($_POST['admin_log_in'])){
+    $email=$_POST['email'];
+    $password=md5($_POST['password']);
+    $sql="SELECT * FROM admin WHERE email='$email' AND password='$password'";
+    $result = $connect->query($sql);
+
+    if ($result->num_rows > 0) {
+         // output data of each row
+     
+         while ($row = $result->fetch_assoc()) {
+           
+            session_start();
+
+            // Add values to the session.
+            $_SESSION['email'] = $email; // string
+            $_SESSION['id'] = $row['id']; // string
+      
+          
+            echo '<script language="javascript"> alert("Welcome TO Store Admin")</script>';
+            echo '<script language="javascript">    window.location.href = "./admin/index.php";;</script>';
+          
+        }
+    }else {
+    
+        echo '<script language="javascript">  alert("invalid Credientials");</script>';
+        echo '<script language="javascript">       window.location.href = "./admin_Login.php";</script>';
       
         
     }

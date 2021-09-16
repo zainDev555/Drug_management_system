@@ -12,57 +12,7 @@ include "./layouts/navbar.php";
     <section>
       <div class="row">
         <div class="col-xl-12 col-sm-10 col-12 mb-4">
-          <!-- Button trigger modal -->
-          <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
-            Add
-          </button>
-
-          <!-- Modal -->
-          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-
-                <div class="modal-body">
-
-
-                  <form action="./function.php" method="post">
-                    <div class="form-group">
-                   
-                      <input type="hidden" class="form-control" name="salesman_id" value=" <?php echo $_SESSION['id']; ?>">
-
-                    </div>
-                    <div class="form-group">
-                      <label for="medicine">Medicine Name </label>
-                      <input type="text" class="form-control" name="m_name">
-
-                    </div>
-                    <div class="form-group">
-                      <label for="medicine">Medicine ID </label>
-                      <input type="text" class="form-control" name="m_id">
-
-                    </div>
-                    <div class="form-group">
-                      <label for="medicine">Medicine QTY </label>
-                      <input type="number" class="form-control" name="m_qty">
-
-                    </div>
-                    <div class="form-group">
-                      <label for="medicine">Medicine per qty price </label>
-                      <input type="number" class="form-control" name="m_price">
-
-                    </div>
-                 
-                    <div class="form-group">
-                      <button class="btn btn-info" type="submit" name="save_medicine"> save</button>
-
-                    </div>
-
-                  </form>
-                </div>
-
-              </div>
-            </div>
-          </div>
+         <h4>Store medicine</h4>
           <table class="table">
             <thead>
               <tr>
@@ -77,7 +27,7 @@ include "./layouts/navbar.php";
             <?php
               
 
-                        $sql = "SELECT * FROM medicine where salesman_id='$_SESSION[id]'";
+                        $sql = "SELECT * FROM medicine";
                         $result = $connect->query($sql);
 
                         if ($result->num_rows > 0) {

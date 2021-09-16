@@ -4,7 +4,7 @@
         <div class="list-group list-group-flush mx-3 mt-4">
         
         <a href="./index.php" class="list-group-item list-group-item-action py-2 ripple ">
-            <i class="fas fa-medkit fa-fw me-3"></i><span>Add Medicine </span>
+            <i class="fas fa-medkit fa-fw me-3"></i><span>all Medicine </span>
           </a>
           <a href="./sales.php" class="list-group-item list-group-item-action py-2 ripple ">
             <i class="fas fa-money-bill-wave-alt fa-fw me-3"></i><span>Sales</span>

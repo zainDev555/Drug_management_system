@@ -1,27 +1,7 @@
 
 <?php
 include "../db.php";
-if (isset($_POST['save_medicine'])) {
 
-  $salesman_id = $_POST['salesman_id'];
-  $m_name = $_POST['m_name'];
-  $m_id = $_POST['m_id'];
-  $m_qty = $_POST['m_qty'];
-  $m_price = $_POST['m_price'];
-  $m_total_price =  $m_qty * $m_price;
-
-
-  $sql = "INSERT INTO medicine (salesman_id, m_name, m_id,m_qty,m_price,m_total_price)
-    VALUES ('$salesman_id', '$m_name', '$m_id','$m_qty','$m_price','$m_total_price')";
-
-  if ($connect->query($sql) === TRUE) {
-    echo '<script type="text/javascript">alert("Medicine Addedd")
-        window.location.href="./index.php"
-        </script>';
-  } else {
-    echo "Error: " . $sql . "<br>" . $connect->error;
-  }
-}
 //sales portion
 if (isset($_POST['get_medicine_data_id'])) {
 
@@ -31,7 +11,22 @@ if (isset($_POST['get_medicine_data_id'])) {
   if ($result->num_rows > 0) {
 
     while ($row = $result->fetch_assoc()) {
-      echo $row['m_id'];
+     $res =["m_id"=>$row['m_id'],"m_sale_price",$row['m_sale_price']];
+      echo json_encode($res);
+    }
+  }
+}
+//set qty
+if (isset($_POST['set_qty'])) {
+
+  $sql = "SELECT * FROM medicine WHERE m_id='$_POST[set_qty]'";
+  $result = $connect->query($sql);
+
+  if ($result->num_rows > 0) {
+
+    while ($row = $result->fetch_assoc()) {
+     $res =["m_sale_price",$row['m_sale_price']];
+      echo json_encode($res);
     }
   }
 }
@@ -77,8 +72,11 @@ if (isset($_POST['sale_medicine'])) {
 //return portion
 if (isset($_POST['get_medicine_data_id_for_return'])) {
 
+  $f= $_POST['get_medicine_data_id_for_return']["sm_id"];
+  $g= $_POST['get_medicine_data_id_for_return']["sm_name"];
+  $e= $_POST['get_medicine_data_id_for_return']["sm_qty"];
 
-    $sql = "SELECT * FROM sales_medicine WHERE id='$_POST[get_medicine_data_id_for_return]' ";
+    $sql = "SELECT * FROM sales_medicine WHERE sm_id='$f' and sm_name='$g'  and sm_qty='$e' ";
     $result = $connect->query($sql);
   
     if ($result->num_rows > 0) {
@@ -86,8 +84,8 @@ if (isset($_POST['get_medicine_data_id_for_return'])) {
       while ($row = $result->fetch_assoc()) {
         $res = [ "id" => "$row[id]","sm_name" => "$row[sm_name]","sm_price" => "$row[sm_price]"
         ,"sm_id" => "$row[sm_id]","sm_qty" => "$row[sm_qty]" ];
-        echo json_encode($res);
       }
+      echo json_encode($res);
     }
   }
   if (isset($_POST['return_medicine'])) {
