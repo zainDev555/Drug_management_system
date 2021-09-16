@@ -40,5 +40,8 @@ if (isset($_POST['logout'])) {
     padding: 10px;
     box-shadow: 5px 5px 10px;
   }
+  body{
+    font-family:'Trebuchet MS',  'Lucida Sans', 'Arial', 'sans-serif'
+  }
 </style>
 <body>

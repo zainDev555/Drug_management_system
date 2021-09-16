@@ -426,7 +426,7 @@ if (isset($_POST['save_return_by_manager'])) {
     echo "Error: " . $sql . "<br>" . $connect->error;
   }
 }
-//save Salesman
+//save Store_manager
 if(isset($_POST['saveStore_manager'])){
 
   $password=md5($_POST["password"]);
@@ -441,7 +441,7 @@ if(isset($_POST['saveStore_manager'])){
     echo "Error: " . $sql . "<br>" . $connect->error;
     }
 }
-//edit Salesman
+//edit Store_manager
 if(isset($_POST['updateStore_manager'])){
 
   $password=md5($_POST["password"]);
@@ -457,7 +457,7 @@ if(isset($_POST['updateStore_manager'])){
     echo "Error: " . $sql . "<br>" . $connect->error;
     }
 }
-//del salesman
+//del Store_manager
 if(isset($_POST['delstoremanagernow'])){
 
   

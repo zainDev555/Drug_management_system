@@ -94,7 +94,7 @@ include "./layouts/navbar.php";
             <?php
               
 
-                        $sql = "SELECT * FROM sales_medicine ";
+                        $sql = "SELECT * FROM sales_medicine where salesman_id='$_SESSION[id]'";
                         $result = $connect->query($sql);
 
                         if ($result->num_rows > 0) {

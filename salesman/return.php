@@ -87,7 +87,7 @@ include "./layouts/navbar.php";
             <?php
               
 
-                        $sql = "SELECT * FROM sales_m_return";
+                        $sql = "SELECT * FROM sales_m_return ";
                         $result = $connect->query($sql);
 
                         if ($result->num_rows > 0) {

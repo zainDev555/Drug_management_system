@@ -6,85 +6,58 @@ include "./layouts/navbar.php";
 
 <!--Main layout-->
 <main style="margin-top: 58px">
+<div class="container " >
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+<div class="row mt-10px">
+    <div class="col-md-5 " >
+    <label for="">From: </label>
+        <input type="date" name="date_1" class="form-control "   />
+    </div>
+    <div class="col-md-5">
+
+        <label for="">To:</label>
+        <input type="date" name="date_2" class="form-control"  />
+    </div>
+    <div class="col-md-1">
+
+        <button type="submit" class="btn btn-success mt-4" name="btnseach" style="width: fit-content;margin-top:20px">search</button>
+    </div>
+    
+    
+    </form>
+</div>
   <div class="container pt-4">
 
     <!--Section: Minimal statistics cards-->
     <section>
       <div class="row">
         <div class="col-xl-12 col-sm-10 col-12 mb-4">
-          <!-- Button trigger modal -->
-          <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
-            Add Return
-          </button>
-
-          <!-- Modal -->
-          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-
-                <div class="modal-body">
-
-
-                
-                    <input type="number" name="sm_id" id="sm_id"placeholder="Enter order ID "><button class="btn btn-success"  id="sm_ids" type="button">search</button>
-               
-                  <form action="./function.php" method="post">
-                    <div class="form-group">
-                   
-                    <input type="hidden" class="form-control" required name="salesman_id" value=" <?php echo $_SESSION['id']; ?>">
-                      <input type="hidden" class="form-control" required name="id" id="id">
-
-                    </div>
-                    <div class="form-group">
-                      <label for="medicine">Medicine Name </label>
-                      <input name="rm_name" id="rm_name" class="form-control" required />
-           
-                    
-
-                    </div>
-                    <div class="form-group">
-                      <label for="medicine">Medicine ID </label>
-                      <input type="text" id="rm_id" name="rm_id" class="form-control" required  >
-
-                    </div>
-                    <div class="form-group">
-                      <label for="medicine">Medicine QTY </label>
-                      <input type="number" name="rm_qty" id="rm_qty"class="form-control" required >
-
-                    </div>
-                    <div class="form-group">
-                      <label for="medicine">Medicine price </label>
-                      <input type="number"name="rm_price" id="rm_price" class="form-control" required >
-
-                    </div>
-                 
-                    <div class="form-group">
-                      <button class="btn btn-info" type="submit" name="return_medicine"> save</button>
-
-                    </div>
-
-                  </form>
-                </div>
-
-              </div>
-            </div>
-          </div>
-          <table class="table">
+        <span  class='badge badge-primary bg-info' >In this session you will be find return of store medicines  between start date to last date  </span>          
+        <table class="table">
             <thead>
               <tr>
+                <th scope="col">order_id</th>
                 <th scope="col">medicine_id</th>
                 <th scope="col">Medicine Name</th>
                 <th scope="col">Medicine quantity</th>
                 <th scope="col">price</th>
-                <th scope="col">return date</th>
+                <th scope="col">sales date</th>
               
               </tr>
             </thead>
             <tbody>
             <?php
-              
+              if(isset($_POST['btnseach'])){       
+                $date_1=$_POST["date_1"];
+                $date_2=$_POST["date_2"];
+ 
+                $sql = "SELECT * FROM sales_m_return   where created_at between   '$date_1'  AND   '$date_2'";
+            }else{
+ 
+                $sql = "SELECT * FROM sales_m_return ";
+            }
 
-                        $sql = "SELECT * FROM sales_m_return where salesman_id='$_SESSION[id]'";
+                     
                         $result = $connect->query($sql);
 
                         if ($result->num_rows > 0) {
@@ -93,14 +66,22 @@ include "./layouts/navbar.php";
                             ?>
 
                                 <tr>
+                                    <th scope="row"><?php echo $row['s_table_r_id']; ?></th>
                                     <th scope="row"><?php echo $row['rm_id']; ?></th>
                                     <td><?php echo $row['rm_name']; ?></td>
-                                    <td><?php echo $row['rm_qty']; ?></td>
+                                    <td><?php if($row['rm_qty']==0){
+                                      echo "<span class='badge badge-primary bg-info'>Order return</span>";
+                                    }else{
+                                        echo $row['rm_qty'];
+                                        } ?></td>
                                     <td><?php echo $row['rm_price']; ?></td>
                                     <td><?php echo $row['created_at']; ?></td>
+                               
                                 </tr>
                     <?php
                             }
+                        }else{
+                          echo" <td >no result found according to this search</td>";
                         }
                 
 
@@ -115,28 +96,7 @@ include "./layouts/navbar.php";
     <!--Section: Minimal statistics cards-->
 
   </div>
-  <script>
-    $('#sm_ids').on("click",function(){
-      
-      $.ajax({
-        url:'./function.php',
-        type:'post',
-        data:{get_medicine_data_id_for_return:$("#sm_id").val()},
-        success:function(res){
-            const myObj = JSON.parse(res);
-            $("#id").val(myObj.id);
-            $("#rm_name").val(myObj.sm_name);
-            $("#rm_id").val(myObj.sm_id);
-            $("#rm_price").val(myObj.sm_price);
-            $("#rm_qty").val(myObj.sm_qty);
-        
-          
-        }
-      });
-      
 
-    });
-  </script>
 </main>
 <?php
 include "./layouts/footer.php";
