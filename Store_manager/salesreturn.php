@@ -122,7 +122,8 @@ include "./layouts/navbar.php";
       $.ajax({
         url:'./function.php',
         type:'post',
-        data:{ get_salesman_returns:{
+        data:{ 
+          get_salesman_returns:{
             salesman_cnic:$("#salesman_cnic").val(),
             date_1:$("#date_1").val(),
             date_2:$("#date_2").val(),

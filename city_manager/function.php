@@ -13,7 +13,7 @@ if (isset($_POST['save_data'])) {
 
   if ($connect->query($sql) === TRUE) {
     echo '<script type="text/javascript">alert("added now")
-        window.location.href="./index.php"
+        window.location.href="./city_daily_sale.php"
         </script>';
   } else {
     echo "Error: " . $sql . "<br>" . $connect->error;

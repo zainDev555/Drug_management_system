@@ -83,7 +83,7 @@ if (isset($_POST['save_daily_sales_by_manager'])) {
 
   if ($connect->query($sql) === TRUE) {
     echo '<script type="text/javascript">alert("added now")
-    window.location.href="./index.php"
+    window.location.href="./salesman_daily_sale.php"
     </script>';
   } else {
     echo "Error: " . $sql . "<br>" . $connect->error;
@@ -355,7 +355,7 @@ if (isset($_POST['get_salesman_returns'])) {
 
     while ($row = $result->fetch_assoc()) {
       $salesmas_id = $row['id'];
-
+      
       $sql1 = "SELECT * FROM sales_m_return
        WHERE salesman_id='$salesmas_id'";
       $result = $connect->query($sql1);
@@ -363,7 +363,7 @@ if (isset($_POST['get_salesman_returns'])) {
 
         while ($row_sec = $result->fetch_assoc()) {
 
-
+       
           // salesman_mounthly_sale
 
           $sql4 = "SELECT sum(rm_price) as M_sum FROM sales_m_return
@@ -375,19 +375,23 @@ if (isset($_POST['get_salesman_returns'])) {
 
             while ($sum_of_current_month = $result->fetch_assoc()) {
               $sum_mounth = $sum_of_current_month['M_sum'];
+              $res = [
+                "salesman_name" => "$row[name]", "salesman_return_amount" => "$sum_mounth",
+                "salesman_cnic" => "$row[cnic]", "salesman_id" => "$row[id]",
+                "date_1" => "$date_1", "date_2" => "$date_2",
+              ];
+              echo json_encode($res);
             }
           }
           // salesman_mounthly_sale
 
-          $res = [
-            "salesman_name" => "$row[name]", "salesman_return_amount" => "$sum_mounth",
-            "salesman_cnic" => "$row[cnic]", "salesman_id" => "$row[id]",
-            "date_1" => "$date_1", "date_2" => "$date_2",
-          ];
-          echo json_encode($res);
         }
+      }else{
+        echo json_encode(["empty"=>"empty"]);
+        die();
       }
     }
+  
   } else {
     $res = [
       "salesman_name" => " ", "salesman_return_amount" => " ", "salesman_cnic" => " ",

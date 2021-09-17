@@ -13,7 +13,7 @@ include "./layouts/navbar.php";
       <div class="row">
         <div class="col-xl-12 col-sm-10 col-12 mb-4">
           <!-- Button trigger modal -->
-          <!-- <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+          <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
             Add
           </button>
 
@@ -65,7 +65,7 @@ include "./layouts/navbar.php";
 
               </div>
             </div>
-          </div> -->
+          </div> 
           <table class="table">
             <thead>
               <tr>

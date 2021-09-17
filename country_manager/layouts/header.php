@@ -3,14 +3,14 @@ include "../db.php";
 
 session_start();
 
- $_SESSION['id'];
- 
+ echo $_SESSION['id'];
+
 
 
 
 if (!$_SESSION['email']) {
 
-  header("location:../citymanagerLogin.php");
+  header("location:../country_manager_login.php");
 }
 if (isset($_POST['logout'])) {
  
@@ -19,7 +19,7 @@ if (isset($_POST['logout'])) {
 
   unset($_SESSION['id']);
 
-  header("location:../citymanagerLogin.php");
+  header("location:../country_manager_login.php");
 }
 
 

@@ -10,7 +10,7 @@ session_start();
 
 if (!$_SESSION['email']) {
 
-  header("location:../citymanagerLogin.php");
+  header("location:../ceoLogin.php");
 }
 if (isset($_POST['logout'])) {
  
@@ -19,11 +19,11 @@ if (isset($_POST['logout'])) {
 
   unset($_SESSION['id']);
 
-  header("location:../citymanagerLogin.php");
+  header("location:../ceoLogin.php");
 }
 
 
-?>
+?>w
 
 <!DOCTYPE html>
 <html lang="en">

@@ -111,7 +111,8 @@ if(isset($_POST['country_manager_log_in'])){
             // Add values to the session.
             $_SESSION['email'] = $email; // string
             $_SESSION['id'] = $row['id']; // string
-      
+            $_SESSION['city']= $row['city'];
+            $_SESSION['country']= $row['country'];
           
             echo '<script language="javascript"> alert("Welcome TO Store")</script>';
             echo '<script language="javascript">    window.location.href = "./country_manager/index.php";;</script>';

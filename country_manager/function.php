@@ -67,7 +67,7 @@ if (isset($_POST['save_daily_sales_by_country_manager'])) {
 
   if ($connect->query($sql) === TRUE) {
     echo '<script type="text/javascript">alert("Daily sale Add now..!")
-    window.location.href="./index.php"
+    window.location.href="./country_daily_sale.php"
     </script>';
   } else {
     echo "Error: " . $sql . "<br>" . $connect->error;
