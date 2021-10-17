@@ -2,6 +2,7 @@
 <!-- Start your project here-->
 <div class="container">
     <div class="row">
+    <a href="./index.php" class="text-dark"> <- Home</a>
     <div class="col-md-12 " style="padding:10% 10%">
         <div class="card p-3" >
         <h4 class="text-center border-bottom mb-5">CEO Login</h4>

